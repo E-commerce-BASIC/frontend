@@ -12,12 +12,12 @@ const ContextProvider = ({ children }) => {
   const [message, setMessage] = useState("");
   const [user, setUser] = useState(null);
   const [signup, setSignUp] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
   const [login, setLogin] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const router = useRouter();
@@ -33,16 +33,16 @@ const ContextProvider = ({ children }) => {
         setLoading(false);
       } else {
         const response = await axios.post("/api/signup", signup);
-
+        console.log({response},"<-------------")
         setLoading(false);
         setError(response.data.status !== 201);
         setMessage(response.data.message);
 
-        if (response.data.message === "User created successfully") {
+        if (response.data.message === "User Registered Successfully") {
           router.push("/loginpage");
           toast.success("User created successfully");
           setSignUp({
-            name: "",
+            username: "",
             email: "",
             password: "",
           });
@@ -62,16 +62,16 @@ const ContextProvider = ({ children }) => {
 
     try {
       const response = await axios.post("/api/login", login);
-
       setLoading(false);
       setError(response.data.status !== 201);
       setMessage(response.data.message);
 
       if (response.data.message === "User login successfully") {
         router.push("/");
+
         toast.success("User login successfully");
         setLogin({
-          email: "",
+          username: "",
           password: "",
         });
       }

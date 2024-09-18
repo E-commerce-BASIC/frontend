@@ -1,7 +1,6 @@
 "use client";
 import { Context } from "@/Context/Context";
 import Loader from "@/components/Loader";
-import TestUser from "@/components/TestUser";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
@@ -47,12 +46,12 @@ const Login = () => {
 
               <div className="relative">
                 <input
-                  type="email"
+                  type="text"
                   className="w-full rounded-lg border-gray-200 border p-4 pe-12 text-sm shadow-sm"
-                  placeholder="test@gmail.com"
+                  placeholder="test"
                   required
-                  name="email"
-                  value={login.email}
+                  name="username"
+                  value={login.username}
                   onChange={handleChange}
                 />
               </div>
@@ -92,7 +91,6 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <TestUser />
         </div>
 
         <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">

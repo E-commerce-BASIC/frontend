@@ -81,9 +81,9 @@ const Signup = () => {
                 <input
                   type="text"
                   id="FirstName"
-                  name="name"
+                  name="username"
                   required
-                  value={signup.name}
+                  value={signup.username}
                   onChange={handleChnage}
                   placeholder="name"
                   className="mt-1 h-10 px-2  w-full rounded-md border-gray-200 bg-white border text-sm text-gray-800 shadow-sm"
