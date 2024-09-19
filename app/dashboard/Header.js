@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 const Header = () => {
   const [show, setShow] = useState(false);
   const { user } = useContext(Context);
-  const name = user?.data?.name.replace(/ .*/, "");
+  const name = user?.data?.Info?.profile?.full_name.replace(/ .*/, "");
   return (
     <div className="w-full">
       <nav className="bg-white py-2 md:py-4 shadow border-t">

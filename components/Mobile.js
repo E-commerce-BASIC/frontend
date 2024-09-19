@@ -5,7 +5,7 @@ import { useContext } from "react";
 
 const Mobile = ({ setIsOpen, categories }) => {
   const { user, handleLogout } = useContext(Context);
-  const name = user?.data?.name.replace(/ .*/, "");
+  const name = user?.data?.Info?.profile?.full_name.replace(/ .*/, "");
   return (
     <div>
       <div className="flex h-screen flex-col justify-between border-e bg-white">
@@ -185,7 +185,7 @@ const Mobile = ({ setIsOpen, categories }) => {
                 <p className="text-xs">
                   <strong className="block font-medium">{name}</strong>
 
-                  <span> {user?.data?.email} </span>
+                  <span> {user?.data?.Info?.email} </span>
                 </p>
               ) : (
                 <p className="text-xs">

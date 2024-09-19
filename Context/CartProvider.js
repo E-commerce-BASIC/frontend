@@ -17,7 +17,7 @@ const CartProvider = ({ children }) => {
   const addItemToCart = async (e) => {
     try {
       const res = await axios.post("/api/cart", {
-        userId: user?.data?._id,
+        userId: user?.data?.Info.profile.user_id,
         items: [
           {
             productId: e._id,

@@ -17,12 +17,7 @@ export const GET = async (req) => {
         }
       }
     )
-      // .then(x => {
-      //   return NextResponse.json({
-      //     status: 200,
-      //     data: x,
-      //   });
-      // })
+
     if (!user) {
       return NextResponse.json({
         status: 401,

@@ -25,7 +25,7 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
     const getCart = async () => {
       try {
         const res = await axios.post("/api/cart-item", {
-          userId: user?.data?._id,
+          userId: user?.data?.Info.profile.user_id,
         });
         if (res?.data?.cartItem?.length === 0) {
           return null;
