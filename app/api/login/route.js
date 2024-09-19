@@ -17,12 +17,12 @@ export const POST = async (req) => {
         status: 400,
       });
     } else {
-      const check = await axios.post('http://localhost:8080/register_login/login', {
+      const check = await axios.post(`${process.env.api}/register_login/login`, {
         username, password
       })
 
       if (check.status == 200) {
-        cookies().set("authToken", check.data.token, {
+        cookies().set(process.env.authToken, check.data.token, {
           httpOnly: true,
           maxAge: 60 * 60 * 24 * 7,
         });

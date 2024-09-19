@@ -96,7 +96,8 @@ const ContextProvider = ({ children }) => {
     const fetchUser = async () => {
       try {
         const response = await axios.get("/api/login-user");
-        setUser(response.data);
+        // setUser(response.data);
+        console.log(response.data,"<========")
       } catch (error) {
         setUser(null);
         console.log(error);

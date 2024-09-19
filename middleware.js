@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export const middleware = (request) => {
-  const authToken = cookies().get("authToken")?.value || "";
+  const authToken = cookies().get(process.env.authToken)?.value || "";
   let path = request.nextUrl.pathname;
   if (
     path === "/api/login" ||
