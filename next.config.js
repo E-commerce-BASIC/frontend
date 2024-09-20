@@ -6,6 +6,9 @@ const nextConfig = {
       "images.unsplash.com",
       "i.ibb.co",
       "i.postimg.cc",
+      "localhost",
+      "localhost:8080",
+      "http://localhost:8080",
     ],
   },
 };

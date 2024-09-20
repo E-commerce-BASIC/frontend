@@ -1,4 +1,4 @@
-"use client";
+
 import { ProductContext } from "@/Context/CreateProduct";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,7 +37,7 @@ const HomeProducts = ({ show }) => {
                         <Image
                           width={500}
                           height={400}
-                          src={product?.mainImage}
+                          src={process.env.NEXT_PUBLIC_API+'/uploads/'+product?.image}
                           alt={product?.name}
                           className="h-full w-full object-cover object-center group-hover:opacity-75"
                         />

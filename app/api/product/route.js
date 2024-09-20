@@ -1,34 +1,58 @@
-  
+
 // import ClothingProduct from "@/models/Product";
 import { NextResponse } from "next/server";
+import axios from 'axios'
+import { cookies } from "next/headers";
+
+// "price": 120,
+// "quantity":1120,
+// "name": "waleed",
+// "description": "wewe",
+// "category": "wewe",
+// "brand": "wewe",
+// "image": "wewe",
+// "rating": "wewe",
+// "sku": "wewe",
+// "discount": "wewe",
+// "variants": "wewe"
 
 export const POST = async (req) => {
-   
-  // const { name, price, description, category, mainImage } = await req.json();
-  // const clothingProduct = await ClothingProduct.create({
-  //   name,
-  //   price,
-  //   description,
-  //   category,
-  //   mainImage,
-  // });
-  // if (!clothingProduct)
-  //   return NextResponse.json({ status: 400, message: "Product not created" });
-  // return NextResponse.json({
-  //   status: 201,
-  //   message: "Product created successfully",
-  //   data: clothingProduct,
-  // });
+  const authToken = cookies().get(process.env.authToken)?.value || "";
+  const { name, price, description, category, mainImage } = await req.json();
+  const clothingProduct = await axios.post(process.env.api + '/product', {
+    body: { name, price, description, category, image: mainImage },
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+
+  if (!clothingProduct)
+    return NextResponse.json({ status: 400, message: "Product not created" });
+  return NextResponse.json({
+    status: 201,
+    message: "Product created successfully",
+    data: clothingProduct.data,
+  });
 };
 
 export const GET = async (req) => {
-   
-  // const products = await ClothingProduct.find({});
-  // if (!products)
-  //   return NextResponse.json({ status: 400, message: "No products found" });
-  // return NextResponse.json({
-  //   status: 200,
-  //   message: "Products fetched successfully",
-  //   data: products,
-  // });
-};
+  const authToken = cookies().get(process.env.authToken)?.value || "";
+  const products = await axios.get(process.env.api + '/product/getallproduct', {
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  }
+  )
+  if (!products) {
+    return NextResponse.json({ status: 400, message: "No products found" });
+  } else {
+
+    return NextResponse.json({
+      status: 200,
+      message: "Products fetched successfully",
+      data: products.data,
+    });
+  }
+
+}
+

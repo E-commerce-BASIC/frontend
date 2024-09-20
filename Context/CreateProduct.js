@@ -59,6 +59,7 @@ export const ProductContextProvider = ({ children }) => {
   //  get all products
   useEffect(() => {
     axios.get("/api/product").then((res) => {
+      console.log(res,"<======")
       setProducts(res.data);
     });
   }, []);
