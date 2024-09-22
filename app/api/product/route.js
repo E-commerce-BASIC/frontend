@@ -37,12 +37,7 @@ export const POST = async (req) => {
 
 export const GET = async (req) => {
   const authToken = cookies().get(process.env.authToken)?.value || "";
-  const products = await axios.get(process.env.api + '/product/getallproduct', {
-    headers: {
-      Authorization: `Bearer ${authToken}`
-    }
-  }
-  )
+  const products = await axios.get(process.env.api + '/product/getallproduct')
   if (!products) {
     return NextResponse.json({ status: 400, message: "No products found" });
   } else {

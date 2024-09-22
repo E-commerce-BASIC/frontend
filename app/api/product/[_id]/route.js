@@ -13,7 +13,6 @@ export const GET = async (req, { params }) => {
       message: "Product not found",
     });
   } else {
-    // console.log(products.data)
     return NextResponse.json({
       status: 200,
       message: "Product found",
