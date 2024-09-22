@@ -29,8 +29,8 @@ const HomeProducts = ({ show }) => {
                   ?.slice(-4)
                   .map((product) => (
                     <Link
-                      href={`/products/${product?._id}`}
-                      key={product?._id}
+                      href={`/products/${product?.id}`}
+                      key={product?.id}
                       className="group"
                     >
                       <div className="aspect-h-1 aspect-w-1 w-full  md:h-5/6 overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
@@ -53,15 +53,15 @@ const HomeProducts = ({ show }) => {
                   .reverse()
               : products?.data?.map((product) => (
                   <Link
-                    href={`/products/${product?._id}`}
-                    key={product?._id}
+                    href={`/products/${product?.id}`}
+                    key={product?.id}
                     className="group"
                   >
                     <div className="aspect-h-1 aspect-w-1 w-full  md:h-3/4 overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                       <Image
                         width={300}
                         height={300}
-                        src={product?.mainImage}
+                        src={product?.image}
                         alt={product?.name}
                         className="h-full w-full object-cover object-center group-hover:opacity-75"
                       />

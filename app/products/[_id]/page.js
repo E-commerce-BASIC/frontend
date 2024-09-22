@@ -16,17 +16,21 @@ const Product = () => {
   const { cartdetails, setCartDetails, addItemToCart } =
     useContext(CartContext);
   const { user } = useContext(Context);
+
+  
   useEffect(() => {
     const fetchProduct = async () => {
       const res = await axios.get(`/api/product/${_id}`);
       setProduct(res.data.data);
+      // console.log('chall gya----->'+)
     };
     fetchProduct();
   }, [_id]);
+  console.log({product})
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  if (!product?.mainImage) return <Skeleton />;
+  if (!product?.image) return <Skeleton />;
 
   return (
     <div>
@@ -40,8 +44,8 @@ const Product = () => {
                     width={400}
                     height={400}
                     src={
-                      product?.mainImage ? (
-                        product.mainImage
+                      product?.image ? (
+                        process.env.NEXT_PUBLIC_API+"/uploads/"+product.image
                       ) : (
                         <div className="flex items-center justify-center lg:w-1/2  h-96 bg-gray-300 rounded  ">
                           <svg
