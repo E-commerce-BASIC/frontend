@@ -33,7 +33,7 @@ const ContextProvider = ({ children }) => {
         setLoading(false);
       } else {
         const response = await axios.post("/api/signup", signup);
-        console.log({response},"<-------------")
+        // console.log({response},"<-------------")
         setLoading(false);
         setError(response.data.status !== 201);
         setMessage(response.data.message);

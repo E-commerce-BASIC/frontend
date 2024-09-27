@@ -61,7 +61,7 @@ const HomeProducts = ({ show }) => {
                       <Image
                         width={300}
                         height={300}
-                        src={product?.image}
+                        src={process.env.NEXT_PUBLIC_API+'/uploads/'+product?.image}
                         alt={product?.name}
                         className="h-full w-full object-cover object-center group-hover:opacity-75"
                       />

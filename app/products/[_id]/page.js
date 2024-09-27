@@ -26,7 +26,7 @@ const Product = () => {
     };
     fetchProduct();
   }, [_id]);
-  console.log({product})
+  // console.log({product})
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

@@ -9,14 +9,14 @@ const RelatedProducts = ({ id }) => {
   const [product, setProduct] = useState([]);
   useEffect(() => {
     const fetchProduct = async () => {
-      const res = await axios(`/api/relatedProducts/${id}`);
+      const res = await axios.get(`/api/relatedProducts/${id}`);
 
       setProduct(res.data);
     };
     fetchProduct();
   }, [id]);
 
-  console.log();
+  console.log({ product });
 
   if (!product?.relatedProducts) {
     return (
@@ -41,22 +41,22 @@ const RelatedProducts = ({ id }) => {
       <div className=" w-11/12 mx-auto grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-6">
         {product?.relatedProducts?.map((product) => (
           <Link
-            href={`/products/${product?._id}`}
-            key={product?._id}
+            href={`/products/${product?.product?.id}`}
+            key={product?.product?.id}
             className="group"
           >
             <div className="aspect-h-1 aspect-w-1 w-full  md:h-2/3 overflow-hidden rounded-lg  xl:aspect-h-8 xl:aspect-w-7">
               <Image
                 width={500}
                 height={400}
-                src={product?.mainImage}
-                alt={product?.name}
+                src={process.env.NEXT_PUBLIC_API + '/uploads/' + product?.product?.image}
+                alt={product?.product?.name}
                 className="h-full w-full object-contain object-center group-hover:opacity-75"
               />
             </div>
-            <h3 className="mt-4 text-sm text-gray-700">{product?.name}</h3>
+            <h3 className="mt-4 text-sm text-gray-700">{product?.product?.name}</h3>
             <p className="mt-1 text-lg font-medium text-gray-900">
-              ₹{product?.price}
+              ₹{product?.product?.price}
             </p>
           </Link>
         ))}

@@ -18,16 +18,21 @@ import { cookies } from "next/headers";
 
 export const POST = async (req) => {
   const authToken = cookies().get(process.env.authToken)?.value || "";
-  const { name, price, description, category, mainImage } = await req.json();
-  const clothingProduct = await axios.post(process.env.api + '/product', {
-    body: { name, price, description, category, image: mainImage },
-    headers: {
-      Authorization: `Bearer ${authToken}`
+  const formData = await req.formData();
+
+  const clothingProduct = await axios.post(process.env.api + '/product',
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
     }
-  })
+  )
 
   if (!clothingProduct)
     return NextResponse.json({ status: 400, message: "Product not created" });
+
+
   return NextResponse.json({
     status: 201,
     message: "Product created successfully",

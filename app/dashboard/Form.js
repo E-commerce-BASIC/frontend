@@ -17,9 +17,10 @@ const Form = () => {
     setCategory,
     setFile,
     media,
+    file,
     uploading,
   } = useContext(ProductContext);
-
+console.log(file)
   const handleDragOver = (e) => {
     e.preventDefault();
   };
@@ -193,7 +194,7 @@ const Form = () => {
                     className="hidden"
                     required
                     accept="image/*"
-                    onChange={(e) => setFile(e.target.files[0])}
+                    onChange={(e) => (setFile(e.target.files[0]))}
                   />
                 </label>
               </div>
@@ -207,7 +208,7 @@ const Form = () => {
           {uploading ||
           !name ||
           !category ||
-          !media ||
+          !file ||
           !description ||
           !price ? (
             <button
