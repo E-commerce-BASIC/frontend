@@ -103,7 +103,7 @@ const Product = () => {
             name="price"
             className="w-full border  border-gray-300 p-2 rounded-md mt-2"
             required
-            placeholder="Enter product price in ₹"
+            placeholder="Enter product price in $"
             value={product?.price}
             onChange={handleInputChange}
           />

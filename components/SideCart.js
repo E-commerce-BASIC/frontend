@@ -117,63 +117,65 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
                                   ?.map((user, userIndex) => {
                                     return (
                                       <React.Fragment key={userIndex}>
-
-                                        <>
-                                          <li
-                                            key={user?.id}
-                                            className="flex py-6"
-                                          >
-                                            <Link
-                                              href={`/products/${user?.productId}`}
-                                              className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md"
+                                       {
+                                        user.order_items.map((Items,i)=>{
+                                          return(
+                                            <>
+                                            <li
+                                              key={user?.id}
+                                              className="flex py-6"
                                             >
-                                              <Image
-                                                height={200}
-                                                width={200}
-                                                src={process.env.NEXT_PUBLIC_API+'/uploads/'+user?.image}
-                                                alt={user?.name}
-                                                className="h-full w-full object-contain object-center"
-                                              />
-                                            </Link>
-
-                                            <div className="ml-4 flex flex-1 flex-col">
-                                              <div>
-                                                <div className="flex justify-between text-base font-medium text-gray-900">
-                                                  <h3>
-                                                    <a href={user?.href}>
-                                                      {user?.name}
-                                                    </a>
-                                                  </h3>
-
-                                                  <p className="ml-4">
-                                                    ₹{user?.price}
+                                              <Link
+                                                href={`/products/${Items?.product?.id}`}
+                                                className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md"
+                                              >
+                                                <Image
+                                                  height={200}
+                                                  width={200}
+                                                  src={process.env.NEXT_PUBLIC_API+'/uploads/'+Items?.product?.image}
+                                                  alt={Items?.product?.name}
+                                                  className="h-full w-full object-contain object-center"
+                                                />
+                                              </Link>
+  
+                                              <div className="ml-4 flex flex-1 flex-col">
+                                                <div>
+                                                  <div className="flex justify-between text-base font-medium text-gray-900">
+                                                    <h3>
+                                                      <a href={Items?.product?.id}>
+                                                        {Items?.product?.name}
+                                                      </a>
+                                                    </h3>
+  
+                                                    <p className="ml-4">
+                                                      ${Items?.product?.price}
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              
+                                                <div className="flex flex-1 items-end justify-between text-sm">
+                                                  <p className="text-gray-500">
+                                                    Qty {Items?.quantity}
                                                   </p>
+  
+                                                  <div className="flex">
+                                                    <button
+                                                      onClick={() =>
+                                                        removeItem(Items?.product?.id)
+                                                      }
+                                                      type="button"
+                                                      className="font-medium text-[#2f4550] hover:text-[#2f4550]"
+                                                    >
+                                                      Remove
+                                                    </button>
+                                                  </div>
                                                 </div>
                                               </div>
-                                              <p className="mt-4 text-[12px] text-gray-500">
-                                                {user?.size}
-                                              </p>
-                                              <div className="flex flex-1 items-end justify-between text-sm">
-                                                <p className="text-gray-500">
-                                                  Qty {user?.quantity}
-                                                </p>
-
-                                                <div className="flex">
-                                                  <button
-                                                    onClick={() =>
-                                                      removeItem(user?.id)
-                                                    }
-                                                    type="button"
-                                                    className="font-medium text-[#2f4550] hover:text-[#2f4550]"
-                                                  >
-                                                    Remove
-                                                  </button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </li>
-                                        </>
-
+                                            </li>
+                                          </>
+                                          )
+                                        })
+                                       }
                                       </React.Fragment>
                                     );
                                   })
@@ -205,7 +207,7 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
                       {user?.data && (
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <p>Subtotal</p>
-                          <p>₹ {totalPrice}.00</p>
+                          <p>$ {totalPrice}.00</p>
                         </div>
                       )}
                       {user?.data && (
