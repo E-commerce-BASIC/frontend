@@ -1,40 +1,45 @@
-  
-// import Cart from "@/models/Cart";
+
+import axios from "axios";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export const POST = async (req) => {
-   
-  const { userId, items } = await req.json();
+  const authToken = cookies().get(process.env.authToken)?.value || "";
+  const { items } = await req.json(); // Expecting items from the request body
 
-  // try {
-  //   let cart = await Cart.findOne({
-  //     userId,
-  //     "items.productId": items[0].productId,
-  //   });
+  try {
+    // Ensure you are sending the headers correctly in the axios request
+    const cart = await axios.post(
+      `${process.env.api}/order`,
+      {
+        product_id: items[0].productId,
+        quantity: items[0].quantity,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    );
 
-  //   if (cart) {
-  //     return NextResponse.json({
-  //       message: "Item already added",
-  //     });
-  //   } else {
-  //     cart = await Cart.create({ userId, items });
-  //     return NextResponse.json({
-  //       message: "Item added",
-  //       cart,
-  //     });
-  //   }
-  // } catch (error) {
-  //   console.log(error);
+    return NextResponse.json({
+      message: "Item added",
+      cart: cart.data, // Access the data from the response
+    });
 
-  //   return NextResponse.json({
-  //     message: "Item not added",
-  //     error,
-  //   });
-  // }
+  } catch (error) {
+    console.error(error); // Use console.error for logging errors
+
+    return NextResponse.json({
+      message: "Item not added",
+      error: error.response?.data || error.message, // Return more useful error information
+    }, { status: error.response?.status || 500 }); // Set appropriate HTTP status
+  }
 };
 
+
 export const DELETE = async (req) => {
-   
+
   const { id } = await req.json();
   // try {
   //   const cart = await Cart.findByIdAndDelete(id);

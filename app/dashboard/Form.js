@@ -1,8 +1,9 @@
 "use client";
 
 import { ProductContext } from "@/Context/CreateProduct";
+import axios from "axios";
 import Image from "next/image";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 const Form = () => {
   const {
@@ -27,9 +28,15 @@ const Form = () => {
     setbrand,
     setrating,
     setdiscount,
-    setvariants
+    setvariants,
+    selectedTags,
+    setSelectedTags
   } = useContext(ProductContext);
-  console.log(file)
+
+
+  const [Tags, setTags] = React.useState([])
+
+
   const handleDragOver = (e) => {
     e.preventDefault();
   };
@@ -92,36 +99,44 @@ const Form = () => {
     }
   ]
 
-  const [selectedTags, setSelectedTags] = React.useState([]);
-  console.log(selectedTags, "<----")
+
+  // console.log(selectedTags, "<----")
   const handleChangeTag = (e) => {
     setCategory(e.target.value);
     setSelectedTags([]); // Clear selected tags when changing category
   };
 
-  const Tags = [
-    { id: 1, category: 'clothes', tag_name: 'T-Shirts' },
-    { id: 2, category: 'clothes', tag_name: 'Jeans' },
-    { id: 3, category: 'clothes', tag_name: 'Jackets' },
-    { id: 4, category: 'clothes', tag_name: 'Dresses' },
-    { id: 5, category: 'clothes', tag_name: 'Shorts' },
-    { id: 6, category: 'phones', tag_name: 'Smartphones' },
-    { id: 7, category: 'phones', tag_name: 'Feature Phones' },
-    { id: 8, category: 'phones', tag_name: 'Gaming Phones' },
-    { id: 9, category: 'phones', tag_name: 'Foldable Phones' },
-    { id: 10, category: 'phones', tag_name: '5G Phones' },
-    { id: 11, category: 'mobile accessories', tag_name: 'Chargers' },
-    { id: 12, category: 'mobile accessories', tag_name: 'Phone Cases' },
-    { id: 13, category: 'mobile accessories', tag_name: 'Screen Protectors' },
-    { id: 14, category: 'mobile accessories', tag_name: 'Power Banks' },
-    { id: 15, category: 'mobile accessories', tag_name: 'Car Mounts' },
-    { id: 16, category: 'headphones', tag_name: 'Earbuds' },
-    { id: 17, category: 'headphones', tag_name: 'Over-Ear' },
-    { id: 18, category: 'headphones', tag_name: 'Wireless' },
-    { id: 19, category: 'headphones', tag_name: 'Noise Cancelling' },
-    { id: 20, category: 'headphones', tag_name: 'Gaming Headsets' }
-  ]
+  useEffect(() => {
+    const res = async () => {
+      const response = await axios.get("/api/tags");
+      setTags(response.data.data)
+    }
 
+    res()
+  }, [])
+  // const Tags = [
+  //   { id: 1, category: 'clothes', tag_name: 'T-Shirts' },
+  //   { id: 2, category: 'clothes', tag_name: 'Jeans' },
+  //   { id: 3, category: 'clothes', tag_name: 'Jackets' },
+  //   { id: 4, category: 'clothes', tag_name: 'Dresses' },
+  //   { id: 5, category: 'clothes', tag_name: 'Shorts' },
+  //   { id: 6, category: 'phones', tag_name: 'Smartphones' },
+  //   { id: 7, category: 'phones', tag_name: 'Feature Phones' },
+  //   { id: 8, category: 'phones', tag_name: 'Gaming Phones' },
+  //   { id: 9, category: 'phones', tag_name: 'Foldable Phones' },
+  //   { id: 10, category: 'phones', tag_name: '5G Phones' },
+  //   { id: 11, category: 'mobile accessories', tag_name: 'Chargers' },
+  //   { id: 12, category: 'mobile accessories', tag_name: 'Phone Cases' },
+  //   { id: 13, category: 'mobile accessories', tag_name: 'Screen Protectors' },
+  //   { id: 14, category: 'mobile accessories', tag_name: 'Power Banks' },
+  //   { id: 15, category: 'mobile accessories', tag_name: 'Car Mounts' },
+  //   { id: 16, category: 'headphones', tag_name: 'Earbuds' },
+  //   { id: 17, category: 'headphones', tag_name: 'Over-Ear' },
+  //   { id: 18, category: 'headphones', tag_name: 'Wireless' },
+  //   { id: 19, category: 'headphones', tag_name: 'Noise Cancelling' },
+  //   { id: 20, category: 'headphones', tag_name: 'Gaming Headsets' }
+  // ]
+  console.log(Tags)
 
   const handleTagClick = (tag) => {
     setSelectedTags((prevTags) => {
@@ -129,7 +144,7 @@ const Form = () => {
       return isSelected ? prevTags.filter((t) => t.id !== tag.id) : [...prevTags, tag];
     });
   };
-  console.log(category)
+  // console.log(category)
   return (
     <div className="w-full h-full flex items-center justify-center flex-col bg-gray-100 relative">
       <h1 className="w-full text-center my-5">

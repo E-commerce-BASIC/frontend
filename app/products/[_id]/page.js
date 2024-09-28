@@ -149,7 +149,7 @@ const Product = () => {
                   </p>
                 </div>
 
-                <div className="flex items-center mb-8">
+                {/* <div className="flex items-center mb-8">
                   <h2 className="w-16 text-xl font-bold ">
                     Size:
                   </h2>
@@ -174,7 +174,7 @@ const Product = () => {
                       </select>
                     </fieldset>
                   </div>
-                </div>
+                </div> */}
                 <div className="w-32 mb-8 ">
                   <label
                     htmlFor=""

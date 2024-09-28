@@ -15,7 +15,7 @@ export const ProductContextProvider = ({ children }) => {
   const [file, setFile] = useState(null);
   const [media, setMedia] = useState("");
   const [uploading, setUploading] = useState(false);
-
+  const [selectedTags, setSelectedTags] = useState([]);
   const [quantity, setquantity] = useState(0);
   const [brand, setbrand] = useState('');
   const [rating, setrating] = useState('');
@@ -41,7 +41,7 @@ export const ProductContextProvider = ({ children }) => {
     formData.append('brand', brand);
     formData.append('rating', rating);
     formData.append('discount', discount);
-    // formData.append('variants', variants);
+    formData.append('tags', JSON.stringify(selectedTags));
 
     try {
 
@@ -97,7 +97,9 @@ export const ProductContextProvider = ({ children }) => {
         setbrand,
         setrating,
         setdiscount,
-        setvariants
+        setvariants,
+        selectedTags, 
+        setSelectedTags
       }}
     >
       {children}

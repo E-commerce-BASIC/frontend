@@ -4,17 +4,6 @@ import { NextResponse } from "next/server";
 import axios from 'axios'
 import { cookies } from "next/headers";
 
-// "price": 120,
-// "quantity":1120,
-// "name": "waleed",
-// "description": "wewe",
-// "category": "wewe",
-// "brand": "wewe",
-// "image": "wewe",
-// "rating": "wewe",
-// "sku": "wewe",
-// "discount": "wewe",
-// "variants": "wewe"
 
 export const POST = async (req) => {
   const authToken = cookies().get(process.env.authToken)?.value || "";

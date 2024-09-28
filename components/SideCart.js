@@ -11,25 +11,24 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
   const { user } = useContext(Context);
   const [usersCart, setUserCart] = useState([]);
   const totalPrice = usersCart?.reduce(
-    (total, item) =>
+    (total, order) =>
       total +
-      item?.items?.reduce(
-        (total, item) => total + item?.price * item?.quantity,
+      order?.order_items?.reduce(
+        (subtotal, orderItem) => subtotal + orderItem?.price * orderItem?.quantity,
         0
       ),
     0
   );
 
+
   // get user cart data
   useEffect(() => {
     const getCart = async () => {
       try {
-        const res = await axios.post("/api/cart-item", {
-          userId: user?.data?.Info.profile.user_id,
-        });
-        if (res?.data?.cartItem?.length === 0) {
-          return null;
-        }
+        const res = await axios.get("/api/cart-item");
+        // if (res?.data?.cartItem?.length === 0) {
+        //   return null;
+        // }
 
         setUserCart(res?.data?.cartItem);
       } catch (error) {
@@ -38,7 +37,8 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
     };
     user && getCart();
   }, [user]);
-
+  console.log(usersCart)
+  // console.log(user?.data)       
   // remove item from cart
   const removeItem = async (productId) => {
     try {
@@ -46,7 +46,7 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
         data: { id: productId },
       });
       if (res.status === 200) {
-        setUserCart(usersCart?.filter((item) => item?._id !== productId));
+        setUserCart(usersCart?.filter((item) => item?.id !== productId));
       }
     } catch (error) {
       console.log(error);
@@ -107,7 +107,7 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
 
                       <div className="mt-8">
                         <div className="flow-root">
-                          {user?.data ? (
+                          {user?.data?.Info ? (
                             <ul
                               role="list"
                               className="-my-6 divide-y divide-gray-200"
@@ -117,65 +117,63 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
                                   ?.map((user, userIndex) => {
                                     return (
                                       <React.Fragment key={userIndex}>
-                                        {user?.items?.map((item) => {
-                                          return (
-                                            <>
-                                              <li
-                                                key={item?._id}
-                                                className="flex py-6"
-                                              >
-                                                <Link
-                                                  href={`/products/${item?.productId}`}
-                                                  className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md"
-                                                >
-                                                  <Image
-                                                    height={200}
-                                                    width={200}
-                                                    src={item?.image}
-                                                    alt={item?.name}
-                                                    className="h-full w-full object-contain object-center"
-                                                  />
-                                                </Link>
 
-                                                <div className="ml-4 flex flex-1 flex-col">
-                                                  <div>
-                                                    <div className="flex justify-between text-base font-medium text-gray-900">
-                                                      <h3>
-                                                        <a href={item?.href}>
-                                                          {item?.name}
-                                                        </a>
-                                                      </h3>
+                                        <>
+                                          <li
+                                            key={user?.id}
+                                            className="flex py-6"
+                                          >
+                                            <Link
+                                              href={`/products/${user?.productId}`}
+                                              className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md"
+                                            >
+                                              <Image
+                                                height={200}
+                                                width={200}
+                                                src={process.env.NEXT_PUBLIC_API+'/uploads/'+user?.image}
+                                                alt={user?.name}
+                                                className="h-full w-full object-contain object-center"
+                                              />
+                                            </Link>
 
-                                                      <p className="ml-4">
-                                                        ₹{item?.price}
-                                                      </p>
-                                                    </div>
-                                                  </div>
-                                                  <p className="mt-4 text-[12px] text-gray-500">
-                                                    {item?.size}
+                                            <div className="ml-4 flex flex-1 flex-col">
+                                              <div>
+                                                <div className="flex justify-between text-base font-medium text-gray-900">
+                                                  <h3>
+                                                    <a href={user?.href}>
+                                                      {user?.name}
+                                                    </a>
+                                                  </h3>
+
+                                                  <p className="ml-4">
+                                                    ₹{user?.price}
                                                   </p>
-                                                  <div className="flex flex-1 items-end justify-between text-sm">
-                                                    <p className="text-gray-500">
-                                                      Qty {item?.quantity}
-                                                    </p>
-
-                                                    <div className="flex">
-                                                      <button
-                                                        onClick={() =>
-                                                          removeItem(user?._id)
-                                                        }
-                                                        type="button"
-                                                        className="font-medium text-[#2f4550] hover:text-[#2f4550]"
-                                                      >
-                                                        Remove
-                                                      </button>
-                                                    </div>
-                                                  </div>
                                                 </div>
-                                              </li>
-                                            </>
-                                          );
-                                        })}
+                                              </div>
+                                              <p className="mt-4 text-[12px] text-gray-500">
+                                                {user?.size}
+                                              </p>
+                                              <div className="flex flex-1 items-end justify-between text-sm">
+                                                <p className="text-gray-500">
+                                                  Qty {user?.quantity}
+                                                </p>
+
+                                                <div className="flex">
+                                                  <button
+                                                    onClick={() =>
+                                                      removeItem(user?.id)
+                                                    }
+                                                    type="button"
+                                                    className="font-medium text-[#2f4550] hover:text-[#2f4550]"
+                                                  >
+                                                    Remove
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </li>
+                                        </>
+
                                       </React.Fragment>
                                     );
                                   })
@@ -218,11 +216,10 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
                       <div className="mt-6">
                         {user?.data ? (
                           <div
-                            className={`w-full mx-auto ${
-                              totalPrice <= 0
+                            className={`w-full mx-auto ${totalPrice <= 0
                                 ? "opacity-50 cursor-not-allowed"
                                 : ""
-                            }`}
+                              }`}
                           >
                             <Button />
                           </div>

@@ -16,7 +16,7 @@ const RelatedProducts = ({ id }) => {
     fetchProduct();
   }, [id]);
 
-  console.log({ product });
+  // console.log({ product });
 
   if (!product?.relatedProducts) {
     return (
