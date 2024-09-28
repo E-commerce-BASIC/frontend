@@ -2,7 +2,7 @@
 
 import { ProductContext } from "@/Context/CreateProduct";
 import Image from "next/image";
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 const Form = () => {
   const {
@@ -19,8 +19,17 @@ const Form = () => {
     media,
     file,
     uploading,
+    quantity,
+    brand,
+    rating,
+    discount,
+    setquantity,
+    setbrand,
+    setrating,
+    setdiscount,
+    setvariants
   } = useContext(ProductContext);
-console.log(file)
+  console.log(file)
   const handleDragOver = (e) => {
     e.preventDefault();
   };
@@ -43,6 +52,18 @@ console.log(file)
       case "category":
         setCategory(e.target.value);
         break;
+      case "quantity":
+        setquantity(e.target.value);
+        break;
+      case "brand":
+        setbrand(e.target.value);
+        break;
+      case "rating":
+        setrating(e.target.value);
+        break;
+      case "discount":
+        setdiscount(e.target.value);
+        break;
       default:
         break;
     }
@@ -52,7 +73,63 @@ console.log(file)
 
     fetchProduct(e);
   };
+  const Categories = [
+    {
+      id: 1,
+      category: 'clothes'
+    },
+    {
+      id: 2,
+      category: 'phones'
+    },
+    {
+      id: 3,
+      category: 'mobile accessories'
+    },
+    {
+      id: 4,
+      category: 'headphones'
+    }
+  ]
 
+  const [selectedTags, setSelectedTags] = React.useState([]);
+  console.log(selectedTags, "<----")
+  const handleChangeTag = (e) => {
+    setCategory(e.target.value);
+    setSelectedTags([]); // Clear selected tags when changing category
+  };
+
+  const Tags = [
+    { id: 1, category: 'clothes', tag_name: 'T-Shirts' },
+    { id: 2, category: 'clothes', tag_name: 'Jeans' },
+    { id: 3, category: 'clothes', tag_name: 'Jackets' },
+    { id: 4, category: 'clothes', tag_name: 'Dresses' },
+    { id: 5, category: 'clothes', tag_name: 'Shorts' },
+    { id: 6, category: 'phones', tag_name: 'Smartphones' },
+    { id: 7, category: 'phones', tag_name: 'Feature Phones' },
+    { id: 8, category: 'phones', tag_name: 'Gaming Phones' },
+    { id: 9, category: 'phones', tag_name: 'Foldable Phones' },
+    { id: 10, category: 'phones', tag_name: '5G Phones' },
+    { id: 11, category: 'mobile accessories', tag_name: 'Chargers' },
+    { id: 12, category: 'mobile accessories', tag_name: 'Phone Cases' },
+    { id: 13, category: 'mobile accessories', tag_name: 'Screen Protectors' },
+    { id: 14, category: 'mobile accessories', tag_name: 'Power Banks' },
+    { id: 15, category: 'mobile accessories', tag_name: 'Car Mounts' },
+    { id: 16, category: 'headphones', tag_name: 'Earbuds' },
+    { id: 17, category: 'headphones', tag_name: 'Over-Ear' },
+    { id: 18, category: 'headphones', tag_name: 'Wireless' },
+    { id: 19, category: 'headphones', tag_name: 'Noise Cancelling' },
+    { id: 20, category: 'headphones', tag_name: 'Gaming Headsets' }
+  ]
+
+
+  const handleTagClick = (tag) => {
+    setSelectedTags((prevTags) => {
+      const isSelected = prevTags.some((t) => t.id === tag.id);
+      return isSelected ? prevTags.filter((t) => t.id !== tag.id) : [...prevTags, tag];
+    });
+  };
+  console.log(category)
   return (
     <div className="w-full h-full flex items-center justify-center flex-col bg-gray-100 relative">
       <h1 className="w-full text-center my-5">
@@ -82,6 +159,24 @@ console.log(file)
             onChange={handleChange}
           />
         </div>
+        <div className="flex flex-col items-center justify-center mt-3">
+          <label
+            htmlFor="brand"
+            className=" w-full flex items-start justify-start  text-gray-700 text-sm md:text-base font-medium"
+          >
+            Product brand:
+          </label>
+          <input
+            type="text"
+            id="brand"
+            name="brand"
+            className="w-full  border border-gray-300 p-2 rounded-md mt-2"
+            required
+            placeholder="Enter product brand"
+            value={brand}
+            onChange={handleChange}
+          />
+        </div>
         <div className="flex flex-col items-center justify-center  mt-3">
           <label
             htmlFor="price"
@@ -97,6 +192,24 @@ console.log(file)
             required
             placeholder="Enter product price in ₹"
             value={price}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex flex-col items-center justify-center  mt-3">
+          <label
+            htmlFor="price"
+            className=" w-full flex items-start justify-start  text-gray-700 text-sm md:text-base font-medium"
+          >
+            quantity:
+          </label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            className="w-full border  border-gray-300 p-2 rounded-md mt-2"
+            required
+            placeholder="Enter product quantity"
+            value={quantity}
             onChange={handleChange}
           />
         </div>
@@ -121,29 +234,62 @@ console.log(file)
             style={{ resize: "none" }}
           ></textarea>
         </div>
-        <div className="flex flex-col items-center justify-center  mt-3">
-          <label
-            htmlFor="description"
-            className=" w-full flex items-start justify-start  text-gray-700 text-sm md:text-base font-medium"
-          >
-            Category:
-          </label>
-          <select
-            name="category"
-            id="category"
-            className="w-full border border-gray-300 p-2 rounded-md mt-2"
-            placeholder="Select category"
-            required
-            value={category}
-            onChange={handleChange}
-          >
-            <option value="" disabled>
-              Select category
-            </option>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-            <option value="Kids">Kids</option>
-          </select>
+        <div>
+          {/* Category Dropdown */}
+          <div className="flex flex-col items-center justify-center mt-3">
+            <label
+              htmlFor="description"
+              className="w-full flex items-start justify-start text-gray-700 text-sm md:text-base font-medium"
+            >
+              Category:
+            </label>
+            <select
+              name="category"
+              id="category"
+              className="w-full border border-gray-300 p-2 rounded-md mt-2"
+              placeholder="Select category"
+              required
+              value={category}
+              onChange={handleChangeTag}
+            >
+              <option value="" disabled>
+                Select category
+              </option>
+              {Categories.map((x, i) => (
+                <option key={i} value={x.category}>
+                  {x.category}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Tags Display */}
+          <div className="mt-4">
+            <div className="font-medium">Tags:</div>
+            {category && (
+              <ul className="flex flex-wrap mt-2">
+                {Tags.filter(tag => tag.category === category).map((tag) => (
+                  <li
+                    key={tag.id}
+                    className={`m-1 p-2 border rounded-lg cursor-pointer ${selectedTags.some((t) => t.id === tag.id) ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
+                      }`}
+                    onClick={() => handleTagClick(tag)}
+                  >
+                    {tag.tag_name} {/* Display the tag name */}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+
+          {/* Selected Tags */}
+          <div className="mt-4">
+            <label className="font-medium">Selected Tags:</label>
+            <div className="w-full border border-gray-300 p-2 rounded-md mt-2 bg-white">
+              {selectedTags.length > 0 ? selectedTags.map(t => t.tag_name).join(', ') : 'No tags selected'}
+            </div>
+          </div>
         </div>
         <div className="flex flex-col items-center justify-center  mt-3">
           <label
@@ -206,11 +352,11 @@ console.log(file)
 
         <div className=" flex flex-col items-center justify-center  mt-3">
           {uploading ||
-          !name ||
-          !category ||
-          !file ||
-          !description ||
-          !price ? (
+            !name ||
+            !category ||
+            !file ||
+            !description ||
+            !price ? (
             <button
               type="submit"
               disabled

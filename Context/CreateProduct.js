@@ -15,6 +15,13 @@ export const ProductContextProvider = ({ children }) => {
   const [file, setFile] = useState(null);
   const [media, setMedia] = useState("");
   const [uploading, setUploading] = useState(false);
+
+  const [quantity, setquantity] = useState(0);
+  const [brand, setbrand] = useState('');
+  const [rating, setrating] = useState('');
+  const [discount, setdiscount] = useState('');
+  const [variants, setvariants] = useState('');
+
   const route = useRouter();
 
   const [products, setProducts] = useState([]);
@@ -30,6 +37,11 @@ export const ProductContextProvider = ({ children }) => {
     formData.append('category', category);
     formData.append('image', file); // Append the file
     formData.append('uploading', uploading);
+    formData.append('quantity', quantity);
+    formData.append('brand', brand);
+    formData.append('rating', rating);
+    formData.append('discount', discount);
+    // formData.append('variants', variants);
 
     try {
 
@@ -77,6 +89,15 @@ export const ProductContextProvider = ({ children }) => {
         setFile,
         media,
         products,
+        quantity,
+        brand,
+        rating,
+        discount,
+        setquantity,
+        setbrand,
+        setrating,
+        setdiscount,
+        setvariants
       }}
     >
       {children}
