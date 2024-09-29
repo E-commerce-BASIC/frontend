@@ -21,20 +21,20 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
   );
 
 
+  const getCart = async () => {
+    try {
+      const res = await axios.get("/api/cart-item");
+      // if (res?.data?.cartItem?.length === 0) {
+      //   return null;
+      // }
+
+      setUserCart(res?.data?.cartItem);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // get user cart data
   useEffect(() => {
-    const getCart = async () => {
-      try {
-        const res = await axios.get("/api/cart-item");
-        // if (res?.data?.cartItem?.length === 0) {
-        //   return null;
-        // }
-
-        setUserCart(res?.data?.cartItem);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     user && getCart();
   }, [user]);
   console.log(usersCart)
@@ -42,16 +42,17 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
   // remove item from cart
   const removeItem = async (productId) => {
     try {
-      const res = await axios.delete("/api/cart", {
-        data: { id: productId },
+      const res = await axios.post("/api/cart-item/item-delete", {
+        id: productId ,
       });
       if (res.status === 200) {
-        setUserCart(usersCart?.filter((item) => item?.id !== productId));
+        getCart()
       }
     } catch (error) {
       console.log(error);
     }
   };
+  
 
   return (
     <Transition.Root as={Fragment} show={isCartOpen}>
