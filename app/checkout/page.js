@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
+import { useRouter } from "next/navigation";
 
 export default function Checkout() {
   const [CartItem, setCartItem] = useState([])
@@ -14,20 +15,8 @@ export default function Checkout() {
       ))
       .catch(x => console.log(x))
   }, [])
-console.log(CartItem)
-  // const cartItems = [
-  //   { id: 1, name: 'T-Shirt', price: 20, quantity: 2, image: '/images/tshirt.jpg' },
-  //   { id: 2, name: 'Jeans', price: 50, quantity: 1, image: '/images/jeans.jpg' },
-  //   { id: 3, name: 'Sneakers', price: 80, quantity: 1, image: '/images/sneakers.jpg' },
-  //   // Add more items to test the scrolling functionality
-  //   { id: 4, name: 'Jacket', price: 100, quantity: 1, image: '/images/jacket.jpg' },
-  //   { id: 5, name: 'Cap', price: 15, quantity: 1, image: '/images/cap.jpg' },
-  //   { id: 6, name: 'Socks', price: 10, quantity: 5, image: '/images/socks.jpg' },
-  // ];
 
-  // const getTotalPrice = () => {
-  //   return CartItem?.reduce((total, item) => total + item.price * item.quantity, 0);
-  // };
+  const route =useRouter()
 
   return (
     <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between bg-gray-100 p-8 rounded-lg shadow-lg">
@@ -63,7 +52,7 @@ console.log(CartItem)
           <span>Total Price:</span>
           <span>${SubTotal}</span>
         </div>
-        <button className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-300">
+        <button onClick={()=>route.push('/checkout/billing_info')} className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-300">
           Proceed to Purchase
         </button>
       </div>

@@ -37,7 +37,7 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
   useEffect(() => {
     user && getCart();
   }, [user]);
-  console.log(usersCart)
+  // console.log(usersCart)
   // console.log(user?.data)       
   // remove item from cart
   const removeItem = async (productId) => {
@@ -224,7 +224,7 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
                                 : ""
                               }`}
                           >
-                            <Button />
+                            <Button setIsCartOpen={setIsCartOpen}/>
                           </div>
                         ) : (
                           <Link
