@@ -5,7 +5,7 @@ import { useContext } from "react";
 
 const Mobile = ({ setIsOpen, categories }) => {
   const { user, handleLogout } = useContext(Context);
-  const name = user?.data?.Info?.profile?.full_name.replace(/ .*/, "");
+  const name = user?.data?.Info?.profile?.full_name?.replace(/ .*/, "");
   return (
     <div>
       <div className="flex h-screen flex-col justify-between border-e bg-white">

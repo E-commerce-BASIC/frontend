@@ -13,7 +13,7 @@ const Header = () => {
   const { user, handleLogout } = useContext(Context);
   const [categories, setCategories] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
-  const name = user?.data?.Info?.profile?.full_name.replace(/ .*/, "");
+  const name = user?.data?.Info?.profile?.full_name?.replace(/ .*/, "");
 
   useEffect(() => {
     const fetchCategories = async () => {
