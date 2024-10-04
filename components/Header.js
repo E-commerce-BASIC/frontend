@@ -109,6 +109,14 @@ const Header = () => {
                     Contact
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className="text-gray-800 transition hover:text-gray-800/75 "
+                    href="/order_history"
+                  >
+                    Orders
+                  </Link>
+                </li>
                 {user?.data?.isAdmin && (
                   <li>
                     <Link
