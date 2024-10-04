@@ -19,6 +19,7 @@ const BillingProvider = ({ children }) => {
     payment_methode: "",
     tax_info: "",
   });
+  
   const Billing_info_api = async () => {
     // console.log(formData)
     try {

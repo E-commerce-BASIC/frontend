@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import CartProvider from "@/Context/CartProvider";
 import AdminProvider from "@/Context/AdminProvider";
 import BillingProvider from "@/Context/BillingProvider";
+import PaymentProvider from "@/Context/paymentProvider";
 
 const inter = Montserrat({ subsets: ["latin"] });
 
@@ -22,20 +23,22 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <NextTopLoader color="#000" height={4} />
-        <BillingProvider>
-          <ContextProvider>
-            <AdminProvider>
-              <ProductContextProvider>
-                <CartProvider>
-                  <Header />
-                  <Toaster />
-                  {children}
-                  <Footer />
-                </CartProvider>
-              </ProductContextProvider>
-            </AdminProvider>
-          </ContextProvider>
-        </BillingProvider>
+        <PaymentProvider>
+          <BillingProvider>
+            <ContextProvider>
+              <AdminProvider>
+                <ProductContextProvider>
+                  <CartProvider>
+                    <Header />
+                    <Toaster />
+                    {children}
+                    <Footer />
+                  </CartProvider>
+                </ProductContextProvider>
+              </AdminProvider>
+            </ContextProvider>
+          </BillingProvider>
+        </PaymentProvider>
       </body>
     </html>
   );

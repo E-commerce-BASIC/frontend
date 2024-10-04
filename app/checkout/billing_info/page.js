@@ -1,17 +1,30 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Billing } from "@/Context/BillingProvider";
+import { bank } from "@/Context/paymentProvider";
 import axios from "axios";
 
 const Stepper = () => {
-  const { formData, setFormData, currentStep, setCurrentStep,Billing_info_api } =
-    useContext(Billing);
+  const {
+    formData,
+    setFormData,
+    currentStep,
+    setCurrentStep,
+    Billing_info_api,
+  } = useContext(Billing);
 
-  const nextStep = async() => {
+  const { Payment } = useContext(bank);
+useEffect(()=>{
+  setCurrentStep(1)
+},[])
+  const nextStep = async () => {
     if (currentStep == 1) setCurrentStep(currentStep + 1);
     else if (currentStep == 2)
-      return Billing_info_api();
-    else if (currentStep == 3) console.log("run here");
+      return (
+        await Billing_info_api(),
+        await Payment(),
+        setCurrentStep(currentStep + 1)
+      );
   };
 
   const previousStep = () => {
@@ -168,6 +181,9 @@ const Stepper = () => {
               </select>
             </div>
           </div>
+        )}
+        {currentStep == 3 && (
+          <div> congratulations your order is successfull!</div>
         )}
       </div>
 
