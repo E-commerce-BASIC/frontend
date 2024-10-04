@@ -121,6 +121,44 @@ const ContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const [formData, setFormData] = useState({
+    full_name: "",
+    address: "",
+    city: "",
+    country: "",
+    email: "",
+    phone_no: "",
+    payment_methode: "",
+    tax_info: "",
+  });
+  const Billing_info_api = async () => {
+    // const authToken = cookies().get(process.env.authToken)?.value || "";
+    try {
+      const billing = await axios.post(
+        "/api/checkout/billing",
+        {
+            full_name: formData.full_name,
+            address :formData.address,
+            city :formData.city,
+            country: formData.country,
+            email: formData.email,
+            phone_no: formData.phone_no,
+            payment_methode: formData.payment_methode,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(billing, "<========================");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   // useEffect(() => {
   //   if (!user?.isAdmin) {
   //     router.push("/");
@@ -140,6 +178,11 @@ const ContextProvider = ({ children }) => {
         handleLoginSubmit,
         user,
         handleLogout,
+        formData,
+        setFormData,
+        currentStep,
+        setCurrentStep,
+        Billing_info_api,
       }}
     >
       {children}

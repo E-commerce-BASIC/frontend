@@ -1,22 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Context } from "@/Context/Context";
+import axios from "axios";
 
 const Stepper = () => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
-    full_name: "",
-    address: "",
-    city: "",
-    country: "",
-    email: "",
-    phone_no: "",
-    payment_methode: "",
-    tax_info: "",
-  });
-  // console.log(formData)
-  const nextStep = () => {
+  const { formData, setFormData, currentStep, setCurrentStep,Billing_info_api } =
+    useContext(Context);
+
+  const nextStep = async() => {
     if (currentStep == 1) setCurrentStep(currentStep + 1);
-    else if (currentStep == 2) console.log(formData);
+    else if (currentStep == 2)
+      return Billing_info_api();
+    else if (currentStep == 3) console.log("run here");
   };
 
   const previousStep = () => {
