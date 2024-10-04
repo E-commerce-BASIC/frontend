@@ -23,7 +23,7 @@ const BillingProvider = ({ children }) => {
     // console.log(formData)
     try {
       const billing = await axios.post("/api/checkout/billing", {
-        data: {
+        // data: {
           full_name: formData.full_name,
           address: formData.address,
           city: formData.city,
@@ -31,7 +31,7 @@ const BillingProvider = ({ children }) => {
           email: formData.email,
           phone_no: formData.phone_no,
           payment_methode: formData.payment_methode,
-        },
+        // },
       }); // Send as JSON
       console.log(billing, "<========================");
     } catch (error) {

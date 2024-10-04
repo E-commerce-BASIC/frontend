@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <NextTopLoader color="#000" height={4} />
-        {/* <BillingProvider> */}
+        <BillingProvider>
           <ContextProvider>
             <AdminProvider>
               <ProductContextProvider>
@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
               </ProductContextProvider>
             </AdminProvider>
           </ContextProvider>
-        {/* </BillingProvider> */}
+        </BillingProvider>
       </body>
     </html>
   );

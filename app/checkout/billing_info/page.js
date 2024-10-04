@@ -1,11 +1,11 @@
 "use client";
 import { useState, useContext } from "react";
-import { Context } from "@/Context/Context";
+import { Billing } from "@/Context/BillingProvider";
 import axios from "axios";
 
 const Stepper = () => {
   const { formData, setFormData, currentStep, setCurrentStep,Billing_info_api } =
-    useContext(Context);
+    useContext(Billing);
 
   const nextStep = async() => {
     if (currentStep == 1) setCurrentStep(currentStep + 1);
