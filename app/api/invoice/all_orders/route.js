@@ -4,10 +4,8 @@ import { cookies } from "next/headers";
 import axios from "axios";
 
 export const GET = async (req) => {
-  const { searchParams } = new URL(req.url);
-  const Order_id = searchParams.get("order_id");
   const authToken = cookies().get(process.env.authToken)?.value || "";
-  const check = await axios.get(`${process.env.api}/invoice/download/${Order_id}`, {
+  const check = await axios.get(`${process.env.api}/order/orders`, {
     headers: {
       Authorization: `Bearer ${authToken}`,
     },

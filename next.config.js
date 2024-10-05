@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // trailingSlash:true,
   images: {
     domains: [
       "tailwindui.com",
@@ -8,9 +7,15 @@ const nextConfig = {
       "i.ibb.co",
       "i.postimg.cc",
       "localhost",
-      "localhost:8080",
-      "http://localhost:8080",
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/invoices/:path*',
+        destination: 'http://localhost:8080/invoices/:path*', // Proxy to Backend
+      },
+    ];
   },
 };
 
