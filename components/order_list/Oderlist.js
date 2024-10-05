@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Items from "./Items";
 import axios from "axios";
 import moment from "moment";
-import Btn from "../button/Btn";
 
 export default function oder_list() {
   const [Order, setOrder] = useState([]);
@@ -15,7 +14,7 @@ export default function oder_list() {
     };
     Orders();
   }, []);
-  console.log(Order);
+  // console.log(Order);
   return (
     <div className="bg-gray-100 py-10">
       <div className="max-w-7xl mx-auto px-4">

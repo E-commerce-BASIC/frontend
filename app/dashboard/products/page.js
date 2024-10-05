@@ -49,17 +49,18 @@ const Products = () => {
         {currentItems.length ? (
           currentItems.map((item, index) => (
             <Link
-              href={`/dashboard/products/${item?._id}`}
+              href={`/dashboard/products/${item?.id}`}
               key={item?._id}
               className={`w-full border grid md:grid-cols-4 text-sm gap-4 py-4 px-1 md:p-4 hover:bg-gray-200 transition-all duration-200 ${
                 index % 2 === 0 ? "bg-gray-100" : "bg-white"
               }`}
             >
+            
               <div className="mx-2">
                 <Image
                   height={64}
                   width={100}
-                  src={item?.mainImage}
+                  src={process.env.NEXT_PUBLIC_API + '/uploads/' + item?.image}
                   alt={item?.name}
                   className="w-auto h-28 object-cover"
                 />
@@ -69,6 +70,7 @@ const Products = () => {
               </div>
               <div className="text-gray-600 mx-2">{item?.price}</div>
               <div className="text-sm text-gray-500 mx-2">{item?.category}</div>
+            {/* </div> */}
             </Link>
           ))
         ) : (

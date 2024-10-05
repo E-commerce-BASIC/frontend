@@ -20,7 +20,7 @@ const paymentProvider = ({ children }) => {
         payment_methode: formData.payment_methode,
         currency: formData.currency,
       }); // Send as JSON
-      console.log(bank, "<========================");
+      // console.log(bank, "<========================");
     } catch (error) {
       console.error("Error:", error);
     }
