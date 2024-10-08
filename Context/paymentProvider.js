@@ -7,7 +7,7 @@ import { createContext, useEffect, useState } from "react";
 export const bank = createContext();
 
 const paymentProvider = ({ children }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [Payment_details, setPayment_details] = useState({});
 
   const [formData, setFormData] = useState({
     payment_methode: "Cash on delievery",
@@ -20,6 +20,7 @@ const paymentProvider = ({ children }) => {
         payment_methode: formData.payment_methode,
         currency: formData.currency,
       }); // Send as JSON
+      setPayment_details(bank);
       // console.log(bank, "<========================");
     } catch (error) {
       console.error("Error:", error);
@@ -29,7 +30,8 @@ const paymentProvider = ({ children }) => {
   return (
     <bank.Provider
       value={{
-        Payment
+        Payment,
+        Payment_details,
       }}
     >
       {children}

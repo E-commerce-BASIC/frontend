@@ -6,14 +6,20 @@ import { useContext, useEffect, useState } from "react";
 import SideCart from "./SideCart";
 import { Context } from "@/Context/Context";
 import axios from "axios";
+import { FaSearch } from "react-icons/fa";
 
 const Header = () => {
+  const { tracking, setTracking, TrackingData, setTrackingData } =
+    useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { user, handleLogout } = useContext(Context);
   const [categories, setCategories] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
+  const [Search, setSearch] = useState(0);
+
   const name = user?.data?.Info?.profile?.full_name?.replace(/ .*/, "");
+  console.log({TrackingData,Search});
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -22,6 +28,14 @@ const Header = () => {
     };
     fetchCategories();
   }, []);
+
+  const SearchTracking = async (e) => {
+    e.preventDefault();
+    const search = await axios.post("/api/order/tracking", { Search });
+    console.log(search);
+    if (search?.data?.message === "Tracking Found")
+      return setTracking(true), setTrackingData(search);
+  };
   return (
     <div className="w-full relative">
       <header className="bg-white ">
@@ -51,8 +65,8 @@ const Header = () => {
           </Link>
 
           <div className="flex flex-1 items-center justify-end md:justify-between">
-            <nav aria-label="Global" className="hidden md:block">
-              <ul className="flex items-center gap-6 text-sm">
+            <nav aria-label="Global" className="hidden md:block w-full">
+              <ul className="flex items-center gap-6 text-sm w-full">
                 <li>
                   <Link
                     className="text-gray-800 transition hover:text-gray-800/75 "
@@ -116,6 +130,19 @@ const Header = () => {
                   >
                     Orders
                   </Link>
+                </li>
+                <li className="w-full px-4">
+                  <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 shadow-lg w-full">
+                    <FaSearch className="text-gray-500 text-lg mr-3" />
+                    <form onSubmit={SearchTracking}>
+                      <input
+                        type="text"
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="bg-transparent outline-none w-full text-gray-700 placeholder-gray-500"
+                        placeholder="Search for tracking ID"
+                      />
+                    </form>
+                  </div>
                 </li>
                 {user?.data?.isAdmin && (
                   <li>

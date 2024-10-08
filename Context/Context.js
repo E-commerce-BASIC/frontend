@@ -11,6 +11,8 @@ const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [user, setUser] = useState(null);
+  const [tracking, setTracking] = useState(false);
+  const [TrackingData, setTrackingData] = useState({});
   const [signup, setSignUp] = useState({
     username: "",
     email: "",
@@ -122,7 +124,6 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  
   // useEffect(() => {
   //   if (!user?.isAdmin) {
   //     router.push("/");
@@ -142,6 +143,10 @@ const ContextProvider = ({ children }) => {
         handleLoginSubmit,
         user,
         handleLogout,
+        tracking,
+        setTracking,
+        TrackingData,
+        setTrackingData,
       }}
     >
       {children}

@@ -13,10 +13,10 @@ const Stepper = () => {
     Billing_info_api,
   } = useContext(Billing);
 
-  const { Payment } = useContext(bank);
-useEffect(()=>{
-  setCurrentStep(1)
-},[])
+  const { Payment, Payment_details } = useContext(bank);
+  useEffect(() => {
+    setCurrentStep(1);
+  }, []);
   const nextStep = async () => {
     if (currentStep == 1) setCurrentStep(currentStep + 1);
     else if (currentStep == 2)
@@ -183,7 +183,33 @@ useEffect(()=>{
           </div>
         )}
         {currentStep == 3 && (
-          <div> congratulations your order is successfull!</div>
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg flex items-center justify-center shadow-lg mt-4">
+            <svg
+              className="w-6 h-6 text-green-500 mr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12l2 2l4-4"
+              />
+            </svg>
+            <div className="text-center">
+              <p className="font-bold text-lg">
+                Congratulations! Your order is successful!
+              </p>
+              <p className="mt-2">
+                Your tracking ID:{" "}
+              </p>
+              <p className='font-bold text-2xl'>
+              {Payment_details?.data?.data?.Track?.tracking_no}
+              </p>
+            </div>
+          </div>
         )}
       </div>
 

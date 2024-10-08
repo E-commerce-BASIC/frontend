@@ -7,13 +7,18 @@ import moment from "moment";
 export default function oder_list() {
   const [Order, setOrder] = useState([]);
   useEffect(() => {
-    const Orders = async () => {
-      await axios
-        .get("/api/invoice/all_orders")
-        .then((x) => setOrder(x.data.message));
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("/api/invoice/all_orders"); // Make the API call
+        setOrder(response.data.message); // Update state with the fetched orders
+      } catch (error) {
+        console.error("Error fetching orders:", error); // Log any errors
+      }
     };
-    Orders();
+
+    fetchOrders(); // Invoke the async function
   }, []);
+
   // console.log(Order);
   return (
     <div className="bg-gray-100 py-10">
@@ -35,15 +40,15 @@ export default function oder_list() {
               <Items
                 key={i}
                 Processing={x.order_status}
-                Color={"bg-green-500"}
+                // Color={"bg-green-500"}
                 date={moment(x.createdAt).format("LLLL")}
                 T_id={`#${x.id}`}
                 order_id={x.id}
+                x={x}
               />
             );
           })}
         </div>
-
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import AdminProvider from "@/Context/AdminProvider";
 import BillingProvider from "@/Context/BillingProvider";
 import PaymentProvider from "@/Context/paymentProvider";
 import InvoicesProvider from "@/Context/InvoicesProvider";
-
+import TrackingID from "@/components/HomePage/coming_soon2/trackingId/TrackingID";
 const inter = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
@@ -33,8 +33,8 @@ export default function RootLayout({ children }) {
                     <CartProvider>
                       <Header />
                       <Toaster />
+                      <TrackingID />
                       {children}
-                      <Footer />
                     </CartProvider>
                   </ProductContextProvider>
                 </AdminProvider>
