@@ -1,17 +1,17 @@
-import Category from "@/app/category/[categories]/Category";
-  
-// import ClothingProduct from "@/models/Product";
 import { NextResponse } from "next/server";
+import axios from "axios";
 
-export const GET = async (req, { params }) => {
+export const POST = async (req, { params }) => {
   try {
-     
     const category = params.cate;
-    // const product = await ClothingProduct.find({ category });
+    const product = await axios.post(
+      `${process.env.api}/category/get_all_product_by_category`,
+      { category }
+    );
     return NextResponse.json(
       {
         status: "success",
-        // data: product,
+        data: product.data,
       },
       {
         status: 200,

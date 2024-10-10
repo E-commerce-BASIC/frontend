@@ -6,6 +6,20 @@ import moment from "moment";
 
 export default function oder_list() {
   const [Order, setOrder] = useState([]);
+  // const { tracking, setTracking, TrackingData, setTrackingData } =
+  //   useContext(Context);
+  // const statusClasses = {
+  //   Completed: "bg-green-500",
+  //   Processing: "bg-yellow-300",
+  //   Dispatched: "bg-gray-500",
+  //   AddToCart: "bg-red-400",
+  //   Placed: "bg-purple-600",
+  // };
+
+  // Extracting the order status
+  // const orderStatus = tracking;
+  // const backgroundColorClass = statusClasses[orderStatus] || ""; // Fallback to empty string if status is unknown
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -45,6 +59,7 @@ export default function oder_list() {
                 T_id={`#${x.id}`}
                 order_id={x.id}
                 x={x}
+                // backgroundColorClass={orderStatus}
               />
             );
           })}

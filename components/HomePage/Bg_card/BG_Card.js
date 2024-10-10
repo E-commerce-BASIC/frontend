@@ -1,327 +1,77 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Link from "next/link";
 export default function BG_Card() {
+  const [Categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("/api/category"); // Update with the correct endpoint
+        setCategories(response.data.data); // Access the correct data
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+  // console.log(Categories);
   return (
     <div>
       <div className="bgimg_card container  relative z-10  mx-auto p-4 mt-80">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-96">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">Card Title 1</h3>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
-                    alt="Image 1"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2015/11/06/11/49/shopping-cart-1026501_640.jpg"
-                    alt="Image 2"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2024/05/28/07/31/ai-generated-8793077_640.png"
-                    alt="Image 4"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2018/03/03/19/15/silhouette-3196354_640.png"
-                    alt="Image 3"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2024/05/28/07/31/ai-generated-8793077_640.png"
-                    alt="Image 4"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2018/03/03/19/15/silhouette-3196354_640.png"
-                    alt="Image 3"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-            </div>
-            <div className="p-4 text-center">
-              <a
-                href="#"
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
+          {Categories?.map((x, i) => {
+            const firstTwo = x.products.slice(0, 2);
+            const lastTwo = x.products.slice(2);
+            return (
+              <div
+                onClick={() => console.log(x)}
+                className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-96"
               >
-                Read More
-              </a>
-            </div>
-          </div>
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold">{x.category}</h3>
+                  <div className="flex justify-center mt-2 space-x-4">
+                    {firstTwo.map((product, p1) => {
+                      return (
+                        <a href={`/products/${product.id}`}>
+                          <img
+                            src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
+                            alt="Image 1"
+                            className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
+                          />
+                          <p className="text-center">{product.name}</p>
+                        </a>
+                      );
+                    })}
+                  </div>
+                  <div className="flex justify-center mt-2 space-x-4">
+                    {lastTwo.map((product, p1) => {
+                      return (
+                        <a href={`/products/${product.id}`}>
+                          <img
+                            src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
+                            alt="Image 1"
+                            className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
+                          />
+                          <p className="text-center">{product.name}</p>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
 
-          <div className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-96">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">Card Title 1</h3>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
-                    alt="Image 1"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2015/11/06/11/49/shopping-cart-1026501_640.jpg"
-                    alt="Image 2"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
+                <div className="p-4 text-center">
+                  <Link
+                    href={`category/${x?.category}`}
+                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
+                  >
+                    Visit
+                  </Link>
+                </div>
               </div>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2024/05/28/07/31/ai-generated-8793077_640.png"
-                    alt="Image 4"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2018/03/03/19/15/silhouette-3196354_640.png"
-                    alt="Image 3"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-            </div>
-            <div className="p-4 text-center">
-              <a
-                href="#"
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
-              >
-                Read More
-              </a>
-            </div>
-          </div>
-
-          <div className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-96">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">Card Title 1</h3>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
-                    alt="Image 1"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2015/11/06/11/49/shopping-cart-1026501_640.jpg"
-                    alt="Image 2"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2024/05/28/07/31/ai-generated-8793077_640.png"
-                    alt="Image 4"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2018/03/03/19/15/silhouette-3196354_640.png"
-                    alt="Image 3"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-            </div>
-            <div className="p-4 text-center">
-              <a
-                href="#"
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
-              >
-                Read More
-              </a>
-            </div>
-          </div>
-
-          <div className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-96">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">Card Title 1</h3>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
-                    alt="Image 1"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2015/11/06/11/49/shopping-cart-1026501_640.jpg"
-                    alt="Image 2"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2024/05/28/07/31/ai-generated-8793077_640.png"
-                    alt="Image 4"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2018/03/03/19/15/silhouette-3196354_640.png"
-                    alt="Image 3"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-            </div>
-            <div className="p-4 text-center">
-              <a
-                href="#"
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
-              >
-                Read More
-              </a>
-            </div>
-          </div>
-
-          <div className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-96">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">Card Title 1</h3>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
-                    alt="Image 1"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2015/11/06/11/49/shopping-cart-1026501_640.jpg"
-                    alt="Image 2"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2024/05/28/07/31/ai-generated-8793077_640.png"
-                    alt="Image 4"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2018/03/03/19/15/silhouette-3196354_640.png"
-                    alt="Image 3"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-            </div>
-            <div className="p-4 text-center">
-              <a
-                href="#"
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
-              >
-                Read More
-              </a>
-            </div>
-          </div>
-
-          <div className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-96">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">Card Title 1</h3>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
-                    alt="Image 1"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2015/11/06/11/49/shopping-cart-1026501_640.jpg"
-                    alt="Image 2"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-              <div className="flex justify-center mt-2 space-x-4">
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2024/05/28/07/31/ai-generated-8793077_640.png"
-                    alt="Image 4"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-                <a href="">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2018/03/03/19/15/silhouette-3196354_640.png"
-                    alt="Image 3"
-                    className="w-24 h-24 sm:w-32 sm:h-32 p-3 rounded-lg"
-                  />
-                  <p className="text-center">Lorem, ipsum.</p>
-                </a>
-              </div>
-            </div>
-            <div className="p-4 text-center">
-              <a
-                href="#"
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
-              >
-                Read More
-              </a>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>

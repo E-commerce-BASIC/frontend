@@ -80,23 +80,49 @@ const Form = () => {
 
     fetchProduct(e);
   };
+  
+
   const Categories = [
     {
       id: 1,
-      category: 'clothes'
+      category: 'Smartphones'
     },
     {
       id: 2,
-      category: 'phones'
+      category: 'Tablets'
     },
     {
       id: 3,
-      category: 'mobile accessories'
+      category: 'Laptops'
     },
     {
       id: 4,
-      category: 'headphones'
-    }
+      category: 'Smartwatches'
+    },
+    {
+      id: 5,
+      category: 'Cameras'
+    },
+    {
+      id: 6,
+      category: 'Drones'
+    },
+    {
+      id: 7,
+      category: 'Audio'
+    },
+    {
+      id: 8,
+      category: 'TVs'
+    },
+    {
+      id: 9,
+      category: 'Smart Home'
+    },
+    {
+      id: 10,
+      category: 'Gaming'
+    },
   ]
 
 

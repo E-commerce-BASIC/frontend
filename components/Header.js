@@ -19,16 +19,16 @@ const Header = () => {
   const [Search, setSearch] = useState(0);
 
   const name = user?.data?.Info?.profile?.full_name?.replace(/ .*/, "");
-  console.log({TrackingData,Search});
+  // console.log({TrackingData,Search});
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const res = await axios.get("/api/category");
-      setCategories(res?.data?.data);
+      const res = await axios.get("/api/category/header_menu_categories");
+      setCategories(res?.data.data);
     };
     fetchCategories();
   }, []);
-
+  
   const SearchTracking = async (e) => {
     e.preventDefault();
     const search = await axios.post("/api/order/tracking", { Search });
@@ -93,12 +93,12 @@ const Header = () => {
                       className="absolute top-8 left-0 w-48 bg-white shadow-lg rounded-lg py-3 z-50"
                     >
                       {categories?.map((category) => (
-                        <li key={category}>
+                        <li key={category.id}>
                           <Link
-                            href={`/category/${category}`}
+                            href={`/category/${category.category}`}
                             className="block px-5 py-2.5 text-sm text-gray-800 transition hover:bg-gray-100"
                           >
-                            {category}
+                            {category.category}
                           </Link>
                         </li>
                       ))}

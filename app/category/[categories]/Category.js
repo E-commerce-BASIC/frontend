@@ -9,20 +9,20 @@ const Category = ({ params }) => {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`/api/category/${params}`);
+      const res = await axios.post(`/api/category/${params}`);
       setData(res.data.data);
     };
     fetchData();
     window.scrollTo(0, 0);
   }, [params]);
-
-  if (!data[0]?.mainImage) {
-    return (
-      <div className="w-full lg:w-11/12 mx-auto my-4">
-        <CardSkeleton />
-      </div>
-    );
-  }
+console.log(data)
+  // if (!data[0]?.mainImage) {
+  //   return (
+  //     <div className="w-full lg:w-11/12 mx-auto my-4">
+  //       <CardSkeleton />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -42,9 +42,9 @@ const Category = ({ params }) => {
         Home <span className="mx-2">/</span> {params}
       </div>
       <div className="w-full lg:w-11/12 mx-auto my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2">
-        {data?.map((product) => (
+        {data?.data?.products?.map((product) => (
           <Link
-            href={`/products/${product?._id}`}
+            href={`/products/${product?.id}`}
             key={product?._id}
             className="group"
           >
@@ -52,7 +52,7 @@ const Category = ({ params }) => {
               <Image
                 width={500}
                 height={400}
-                src={product?.mainImage}
+                src={process.env.NEXT_PUBLIC_API+"/uploads/"+product.image}
                 alt={product?.name}
                 className="h-full w-full object-cover object-center group-hover:opacity-75"
               />

@@ -28,7 +28,7 @@ const page = () => {
         {categories?.map((category) => (
           <li key={category.name}>
             <Link
-              href={`/category/${category.link}`}
+              href={`#`}
               className="group relative block"
             >
               <Image

@@ -5,7 +5,7 @@ import axios from "axios";
 export const GET = async (req) => {
   try {
     const { data } = await axios.get(
-      `${process.env.api}/category/all_product`,
+      `${process.env.api}/category/find_all_categories`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export const GET = async (req) => {
     return NextResponse.json(
       {
         status: "success",
-        data: data.categories,
+        data: data.data,
       },
       { status: 200 }
     );
