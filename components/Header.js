@@ -18,8 +18,8 @@ const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [Search, setSearch] = useState(0);
 
-  const name = user?.data?.Info?.profile?.full_name?.replace(/ .*/, "");
-  // console.log({TrackingData,Search});
+  const name = user?.data?.Info?.username.replace(/ .*/, "");
+  console.log(user);
 
   useEffect(() => {
     const fetchCategories = async () => {

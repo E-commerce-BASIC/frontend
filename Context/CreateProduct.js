@@ -17,46 +17,54 @@ export const ProductContextProvider = ({ children }) => {
   const [uploading, setUploading] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [quantity, setquantity] = useState(0);
-  const [brand, setbrand] = useState('');
-  const [rating, setrating] = useState('');
-  const [discount, setdiscount] = useState('');
-  const [variants, setvariants] = useState('');
+  const [brand, setbrand] = useState("");
+  const [rating, setrating] = useState("");
+  const [discount, setdiscount] = useState("");
+  const [variants, setvariants] = useState("");
 
   const route = useRouter();
 
   const [products, setProducts] = useState([]);
 
-
   // create Product
   const fetchProduct = async (e) => {
     e.preventDefault();
-    let formData = new FormData()
-    formData.append('name', name);
-    formData.append('price', price);
-    formData.append('description', description);
-    formData.append('category', category);
-    formData.append('image', file); // Append the file
-    formData.append('uploading', uploading);
-    formData.append('quantity', quantity);
-    formData.append('brand', brand);
-    formData.append('rating', rating);
-    formData.append('discount', discount);
-    formData.append('tags', JSON.stringify(selectedTags));
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("category_name", category);
+    formData.append("image", file); // Append the file
+    formData.append("uploading", uploading);
+    formData.append("quantity", quantity);
+    formData.append("brand", brand);
+    formData.append("rating", rating);
+    formData.append("discount", discount);
+    formData.append("tags", JSON.stringify(selectedTags));
 
     try {
-
       if (uploading) {
         toast.error("Please wait while image is uploading");
         return;
       }
-      const res = await axios.post("/api/product", formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/formdata'
-          }
-        }
-      );
-
+      const res = await axios.post("/api/product", formData, {
+        headers: {
+          "Content-Type": "multipart/formdata",
+        },
+      });
+      setName(""),
+        setPrice(""),
+        setDescription(""),
+        setCategory(""),
+        setFile(null),
+        setMedia(""),
+        setUploading(false),
+        setSelectedTags([]),
+        setquantity(""),
+        setbrand(""),
+        setrating(""),
+        setdiscount(""),
+        setvariants("");
     } catch (error) {
       toast.error(error.message);
       console.log(error);
@@ -98,8 +106,8 @@ export const ProductContextProvider = ({ children }) => {
         setrating,
         setdiscount,
         setvariants,
-        selectedTags, 
-        setSelectedTags
+        selectedTags,
+        setSelectedTags,
       }}
     >
       {children}

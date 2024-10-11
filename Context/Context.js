@@ -29,26 +29,20 @@ const ContextProvider = ({ children }) => {
     setLoading(true);
 
     try {
-      if (signup.password.length < 6) {
-        setError(true);
-        setMessage("Password must be at least 6 characters");
-        setLoading(false);
-      } else {
-        const response = await axios.post("/api/signup", signup);
-        // console.log({response},"<-------------")
-        setLoading(false);
-        setError(response.data.status !== 201);
-        setMessage(response.data.message);
+      const response = await axios.post("/api/signup", signup);
+      // console.log({response},"<-------------")
+      setLoading(false);
+      setError(response.data.status !== 201);
+      setMessage(response.data.message);
 
-        if (response.data.message === "User Registered Successfully") {
-          router.push("/loginpage");
-          toast.success("User created successfully");
-          setSignUp({
-            username: "",
-            email: "",
-            password: "",
-          });
-        }
+      if (response.data.message === "User Registered Successfully") {
+        router.push("/loginpage");
+        toast.success("User created successfully");
+        setSignUp({
+          username: "",
+          email: "",
+          password: "",
+        });
       }
     } catch (error) {
       console.error(error);
