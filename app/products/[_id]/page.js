@@ -1,6 +1,7 @@
 "use client";
 import { CartContext } from "@/Context/CartProvider";
 import { Context } from "@/Context/Context";
+import Installment_Modal from "@/components/Modal/Installment_Modal";
 import RelatedProducts from "@/components/RelatedProducts";
 import Skeleton from "@/components/Skeleton";
 import axios from "axios";
@@ -11,13 +12,14 @@ import { useContext, useEffect, useState } from "react";
 
 const Product = () => {
   const [product, setProduct] = useState({});
+  const [open, setOpen] = useState(false);
+  // const [request, setRequest] = useState({});
 
   const { _id } = useParams();
   const { cartdetails, setCartDetails, addItemToCart } =
     useContext(CartContext);
   const { user } = useContext(Context);
 
-  
   useEffect(() => {
     const fetchProduct = async () => {
       const res = await axios.get(`/api/product/${_id}`);
@@ -38,14 +40,16 @@ const Product = () => {
         <div className="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4 md:w-1/2 ">
-              <div className="sticky top-0 z-30 overflow-hidden ">
+              <div className="sticky top-0 overflow-hidden ">
                 <div className="relative mb-6 lg:mb-10 lg:h-2/4 ">
                   <Image
                     width={400}
                     height={400}
                     src={
                       product?.image ? (
-                        process.env.NEXT_PUBLIC_API+"/uploads/"+product.image
+                        process.env.NEXT_PUBLIC_API +
+                        "/uploads/" +
+                        product.image
                       ) : (
                         <div className="flex items-center justify-center lg:w-1/2  h-96 bg-gray-300 rounded  ">
                           <svg
@@ -134,9 +138,7 @@ const Product = () => {
                         </a>
                       </li>
                     </ul>
-                    <p className="text-xs  ">
-                      (2 customer reviews)
-                    </p>
+                    <p className="text-xs  ">(2 customer reviews)</p>
                   </div>
                   <p className="max-w-md mb-8 text-gray-700 ">
                     {product?.description}
@@ -149,32 +151,6 @@ const Product = () => {
                   </p>
                 </div>
 
-                {/* <div className="flex items-center mb-8">
-                  <h2 className="w-16 text-xl font-bold ">
-                    Size:
-                  </h2>
-                  <div className="flex flex-wrap mx-2 -mb-2">
-                    <fieldset className="flex flex-wrap gap-3">
-                      <legend className="sr-only">size</legend>
-                      <select
-                        value={cartdetails?.size}
-                        onChange={(e) =>
-                          setCartDetails({
-                            ...cartdetails,
-                            size: e.target.value,
-                          })
-                        }
-                        className="py-3 px-4 pe-9 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                      >
-                        {product?.size?.map((size, index) => (
-                          <option key={index} value={size}>
-                            {size}
-                          </option>
-                        ))}
-                      </select>
-                    </fieldset>
-                  </div>
-                </div> */}
                 <div className="w-32 mb-8 ">
                   <label
                     htmlFor=""
@@ -236,9 +212,10 @@ const Product = () => {
                       </Link>
                     )}
                   </div>
+                  <Installment_Modal open={open} setOpen={setOpen} />
                   <div className="w-full px-4 mb-4 lg:mb-0 lg:w-1/2">
-                    <button className="flex items-center bg-black justify-center w-full p-3 text-gray-200 font-semibold border border-gray-500 rounded-md  hover:bg-gray-800 hover:border-gray-600 hover:text-gray-50">
-                      Add to wishlist
+                    <button onClick={()=>setOpen(true)} className="flex items-center bg-black justify-center w-full p-3 text-gray-200 font-semibold border border-gray-500 rounded-md  hover:bg-gray-800 hover:border-gray-600 hover:text-gray-50">
+                      Installment
                     </button>
                   </div>
                 </div>
