@@ -31,6 +31,8 @@ export default function Checkout() {
                  src={process.env.NEXT_PUBLIC_API+'/uploads/'+item?.product?.image}
                 alt={item.name}
                 className="w-24 h-24 rounded-lg object-cover mr-6"
+                height={100}
+                width={100}
               />
               <div className="flex-1">
                 <h3 className="text-xl font-semibold text-gray-800">{item?.product?.name}</h3>

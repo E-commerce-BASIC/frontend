@@ -55,6 +55,8 @@ export default function Carousel_card({ show }) {
                             }
                             alt={productItem.name}
                             className="w-32 h-32 object-cover rounded-lg"
+                            height={100}
+                            width={100}
                           />
                         </div>
 
@@ -112,6 +114,8 @@ export default function Carousel_card({ show }) {
                             }
                             alt={productItem.name}
                             className="w-32 h-32 object-cover rounded-lg"
+                            height={100}
+                            width={100}
                           />
                         </div>
 

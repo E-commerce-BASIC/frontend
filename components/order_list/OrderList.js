@@ -5,9 +5,9 @@ import Items from "./Items";
 import axios from "axios";
 import moment from "moment";
 
-export default function oder_list() {
+export default function OrderList() { // Updated the component name
   const [Order, setOrder] = useState([]);
-  
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -21,7 +21,6 @@ export default function oder_list() {
     fetchOrders(); // Invoke the async function
   }, []);
 
-  // console.log(Order);
   return (
     <div className="bg-gray-100 py-10">
       <div className="max-w-7xl mx-auto px-4">
@@ -42,12 +41,10 @@ export default function oder_list() {
               <Items
                 key={i}
                 Processing={x.order_status}
-                // Color={"bg-green-500"}
                 date={moment(x.createdAt).format("LLLL")}
                 T_id={`#${x.id}`}
                 order_id={x.id}
                 x={x}
-                // backgroundColorClass={orderStatus}
               />
             );
           })}

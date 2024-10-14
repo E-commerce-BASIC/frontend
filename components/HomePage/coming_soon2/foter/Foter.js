@@ -177,6 +177,8 @@ export default function Foter() {
               className="w-1/2 mx-auto lg:mx-0"
               alt="Payment Methods"
               loading="lazy"
+              height={100}
+              width={100}
             />
           </div>
         </div>

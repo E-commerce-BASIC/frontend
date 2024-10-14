@@ -22,6 +22,8 @@ const Signup = () => {
             className="absolute inset-0 h-full w-full object-cover"
             layout="fill"
             objectFit="cover"
+            height={100}
+            width={100}
           />
         </aside>
 

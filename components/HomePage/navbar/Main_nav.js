@@ -29,6 +29,8 @@ export default function Main_nav() {
             <div className="flex items-center pl-3 pr-0">
               <a href="/" className="py-1">
                 <Image
+                  height={100}
+                  width={100}
                   src="https://moyenxpress.com/public/uploads/all/klkZuTK6TuY6MeSswnCCeOBS6VF5Ap8WhMinmHv6.png"
                   alt="moyenxpress"
                   className="max-w-full h-12 md:h-15 lg:h-12"
@@ -58,6 +60,8 @@ export default function Main_nav() {
                 <ul className="py-2">
                   <li className="py-2 px-3 hover:bg-gray-100 flex items-center">
                     <Image
+                      height={100}
+                      width={100}
                       src="https://moyenxpress.com/public/uploads/all/wZyFdGmEDtz5zGLFtBBmGkBKCWZgi5ofKBqhlpZA.png"
                       className="w-4 h-4 mr-2"
                       alt="Sports & Outdoors"
@@ -70,6 +74,8 @@ export default function Main_nav() {
                   </li>
                   <li className="py-2 px-3 hover:bg-gray-100 flex items-center">
                     <Image
+                      height={100}
+                      width={100}
                       src="https://moyenxpress.com/public/uploads/all/xljj2umUYUeqw9NhOIAj4v96G74Kpr3o1Q96EbP9.png"
                       className="w-4 h-4 mr-2"
                       alt="Home, Garden & Tools"
@@ -136,6 +142,8 @@ export default function Main_nav() {
                         <div className="col-span-4" key={index}>
                           <div className="flex items-center">
                             <Image
+                              height={100}
+                              width={100}
                               src="/public/images/icons/country.png"
                               loading="lazy"
                               className="w-5 h-5 mr-2"

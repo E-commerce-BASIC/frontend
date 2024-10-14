@@ -14,9 +14,9 @@ const Stepper = () => {
   } = useContext(Billing);
 
   const { Payment, Payment_details } = useContext(bank);
-  useEffect(() => {
-    setCurrentStep(1);
-  }, []);
+  // useEffect(() => {
+  //   setCurrentStep(1);
+  // }, []);
   const nextStep = async () => {
     if (currentStep == 1) setCurrentStep(currentStep + 1);
     else if (currentStep == 2)

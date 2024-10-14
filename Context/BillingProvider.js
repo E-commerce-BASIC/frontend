@@ -2,7 +2,7 @@
 
 import axios from "axios";
 // import { headers } from "next/headers";
-import { createContext, useEffect, useState } from "react";
+import React,{ createContext, useEffect, useState } from "react";
 
 export const Billing = createContext();
 
