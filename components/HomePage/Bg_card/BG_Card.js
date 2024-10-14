@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Image from "next/image";
 export default function BG_Card() {
   const [Categories, setCategories] = useState([]);
 
@@ -35,7 +36,7 @@ export default function BG_Card() {
                     {firstTwo.map((product, p1) => {
                       return (
                         <a href={`/products/${product.id}`}>
-                          <img
+                         <Image
                             src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
                             alt="Image 1"
                             className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
@@ -49,7 +50,7 @@ export default function BG_Card() {
                     {lastTwo.map((product, p1) => {
                       return (
                         <a href={`/products/${product.id}`}>
-                          <img
+                         <Image
                             src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
                             alt="Image 1"
                             className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"

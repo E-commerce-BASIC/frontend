@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 
 export default function Checkout() {
   const [CartItem, setCartItem] = useState([])
@@ -26,7 +27,7 @@ export default function Checkout() {
         <div className="max-h-96 overflow-y-auto pr-2"> {/* Added scrollable container */}
           {CartItem?.map(item => (
             <div key={item.id} className="flex items-center bg-white p-6 mb-6 rounded-lg shadow-md">
-              <img
+              <Image
                  src={process.env.NEXT_PUBLIC_API+'/uploads/'+item?.product?.image}
                 alt={item.name}
                 className="w-24 h-24 rounded-lg object-cover mr-6"

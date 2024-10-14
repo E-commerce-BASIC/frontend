@@ -8,6 +8,7 @@ import {
 } from "@/components/HomePage/ui/carousel";
 import { ProductContext } from "@/Context/CreateProduct";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Carousel_card({ show }) {
   const { products } = useContext(ProductContext);
@@ -46,7 +47,7 @@ export default function Carousel_card({ show }) {
 
                         {/* Product Image */}
                         <div className="flex justify-center mt-4">
-                          <img
+                        <Image
                             src={
                               process.env.NEXT_PUBLIC_API +
                               "/uploads/" +
@@ -103,7 +104,7 @@ export default function Carousel_card({ show }) {
 
                         {/* Product Image */}
                         <div className="flex justify-center mt-4">
-                          <img
+                        <Image
                             src={
                               process.env.NEXT_PUBLIC_API +
                               "/uploads/" +

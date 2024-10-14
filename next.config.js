@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
+    unoptimized: true,
     domains: [
       "tailwindui.com",
       "images.unsplash.com",
@@ -12,8 +17,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/invoices/:path*',
-        destination: 'http://localhost:8080/invoices/:path*', // Proxy to Backend
+        source: "/invoices/:path*",
+        destination: "http://localhost:8080/invoices/:path*", // Proxy to Backend
       },
     ];
   },

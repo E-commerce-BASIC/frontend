@@ -11,6 +11,7 @@ import {
   faShoppingCart,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
 
 export default function Main_nav() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -27,7 +28,7 @@ export default function Main_nav() {
             {/* Logo */}
             <div className="flex items-center pl-3 pr-0">
               <a href="/" className="py-1">
-                <img
+                <Image
                   src="https://moyenxpress.com/public/uploads/all/klkZuTK6TuY6MeSswnCCeOBS6VF5Ap8WhMinmHv6.png"
                   alt="moyenxpress"
                   className="max-w-full h-12 md:h-15 lg:h-12"
@@ -56,7 +57,7 @@ export default function Main_nav() {
                 </div>
                 <ul className="py-2">
                   <li className="py-2 px-3 hover:bg-gray-100 flex items-center">
-                    <img
+                    <Image
                       src="https://moyenxpress.com/public/uploads/all/wZyFdGmEDtz5zGLFtBBmGkBKCWZgi5ofKBqhlpZA.png"
                       className="w-4 h-4 mr-2"
                       alt="Sports & Outdoors"
@@ -68,7 +69,7 @@ export default function Main_nav() {
                     />
                   </li>
                   <li className="py-2 px-3 hover:bg-gray-100 flex items-center">
-                    <img
+                    <Image
                       src="https://moyenxpress.com/public/uploads/all/xljj2umUYUeqw9NhOIAj4v96G74Kpr3o1Q96EbP9.png"
                       className="w-4 h-4 mr-2"
                       alt="Home, Garden & Tools"
@@ -134,7 +135,7 @@ export default function Main_nav() {
                       {[...Array(5)].map((_, index) => (
                         <div className="col-span-4" key={index}>
                           <div className="flex items-center">
-                            <img
+                            <Image
                               src="/public/images/icons/country.png"
                               loading="lazy"
                               className="w-5 h-5 mr-2"
