@@ -12,13 +12,14 @@ const nextConfig = {
       "i.ibb.co",
       "i.postimg.cc",
       "localhost",
+      "souqbay.com",
     ],
   },
   async rewrites() {
     return [
       {
         source: "/invoices/:path*",
-        destination: "http://localhost:8080/invoices/:path*", // Proxy to Backend
+        destination: "https://souqbay.com/invoices/:path*", // Proxy to Backend
       },
     ];
   },

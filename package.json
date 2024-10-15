@@ -29,7 +29,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "mongoose": "^8.0.3",
-    "next": "14.0.4",
+    "next": "^13.4.12",
     "nextjs-toploader": "^1.6.4",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
