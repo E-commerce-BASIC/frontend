@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "functions": {
+    "/api/Admin/order_status": {},
+    "/api/Admin": {},
+    "/api/alluser": {},
+    "/api/allproducts": {},
+    "/api/cart-item": {},
+    "/api/cart-item/item-delete": {},
+    "/api/category/[cate]": {},
+    "/api/cart": {},
+    "/api/category": {},
+    "/api/category/header_menu_categories": {},
+    "/api/checkout/billing": {},
+    "/api/checkout/bank": {},
+    "/api/invoice/all_orders": {},
+    "/api/checkout/installment": {},
+    "/api/invoice": {},
+    "/api/login-user": {},
+    "/api/login": {},
+    "/api/logout": {},
+    "/api/order/tracking": {},
+    "/api/product/[_id]": {},
+    "/api/product": {},
+    "/api/relatedProducts/[id]": {},
+    "/api/relatedProducts": {},
+    "/api/signup": {},
+    "/api/tags": {}
+  }
+}
