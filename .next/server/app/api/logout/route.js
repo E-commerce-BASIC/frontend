@@ -33,7 +33,8 @@ __webpack_require__.d(__webpack_exports__, {
 var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
-  GET: () => (GET)
+  GET: () => (GET),
+  dynamic: () => (dynamic)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -48,6 +49,7 @@ var next_response = __webpack_require__(89335);
 ;// CONCATENATED MODULE: ./app/api/logout/route.js
 
 
+const dynamic = "force-dynamic";
 const GET = (req)=>{
     const authToken = (0,headers.cookies)().delete(process.env.authToken);
     if (authToken === undefined) {

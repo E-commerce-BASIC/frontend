@@ -110,7 +110,8 @@ __webpack_require__.d(__webpack_exports__, {
 var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
-  POST: () => (POST)
+  POST: () => (POST),
+  dynamic: () => (dynamic)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -128,6 +129,7 @@ var headers = __webpack_require__(40063);
 
 
 
+const dynamic = "force-dynamic";
 const POST = async (req)=>{
     try {
         const authToken = (0,headers.cookies)().get(process.env.authToken)?.value || "";
