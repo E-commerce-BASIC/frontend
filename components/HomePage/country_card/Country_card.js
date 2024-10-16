@@ -10,7 +10,7 @@ export default function Country_card() {
                         <div className="p-4 shadow-sm rounded">
                             <div className="flex items-center justify-between border-b mb-3">
                                 <h3 className="text-lg font-bold">
-                                    <span className="border-b-2 border-red-500">Choose Your Suppliers By Regions</span>
+                                    <span className="border-b-2 border-red-500">Choose waleed</span>
                                 </h3>
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
