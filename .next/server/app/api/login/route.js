@@ -149,6 +149,12 @@ var axios = __webpack_require__(62410);
 
 
 
+async function getCookieData() {
+    const cookieData = (0,headers.cookies)().getAll();
+    return new Promise((resolve)=>setTimeout(()=>{
+            resolve(cookieData);
+        }, 1000));
+}
 const POST = async (req)=>{
     try {
         const { username, password } = await req.json();
@@ -167,7 +173,7 @@ const POST = async (req)=>{
         // If the request is successful and the status is 200
         if (check.status === 200) {
             // Set the cookie using cookies() from next/headers
-            (0,headers.cookies)().set(process.env.authToken, check.data.token, {
+            getCookieData().set(process.env.authToken, check.data.token, {
                 httpOnly: true,
                 maxAge: 60 * 60 * 24 * 7
             });
