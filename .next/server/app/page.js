@@ -1756,7 +1756,7 @@ function Country_card() {
                                     className: "text-lg font-bold",
                                     children: /*#__PURE__*/ jsx_runtime_.jsx("span", {
                                         className: "border-b-2 border-red-500",
-                                        children: "Choose waleed"
+                                        children: "Choose Welcome to Shop "
                                     })
                                 })
                             }),

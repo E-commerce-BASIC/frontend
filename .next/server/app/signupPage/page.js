@@ -495,7 +495,7 @@ const Signup = ()=>{
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                                 className: "mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl",
-                                children: "waleed \uD83D\uDED2"
+                                children: "Welcome to Shop  \uD83D\uDED2"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                 className: "mt-4 leading-relaxed text-gray-500",
