@@ -3,8 +3,6 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import axios from "axios";
 
-export const dynamic = 'force-dynamic';
-
 
 export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
