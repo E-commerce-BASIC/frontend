@@ -5,6 +5,16 @@ import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import axios from 'axios';
 
+async function getCookieData() {
+  const cookieData = cookies().getAll()
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(cookieData)
+    }, 1000)
+  )
+}
+
+
 export const POST = async (req) => {
   try {
     const { username, password } = await req.json();
@@ -26,7 +36,7 @@ export const POST = async (req) => {
     // If the request is successful and the status is 200
     if (check.status === 200) {
       // Set the cookie using cookies() from next/headers
-      cookies().set(process.env.authToken, check.data.token, {
+      getCookieData().set(process.env.authToken, check.data.token, {
         httpOnly: true,
         maxAge: 60 * 60 * 24 * 7, // 7 days
       });
