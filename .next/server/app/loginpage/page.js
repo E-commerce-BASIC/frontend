@@ -547,7 +547,6 @@ const Login = ()=>{
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: "relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2",
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_3___default()), {
-                        fill: "cover",
                         alt: "Welcome",
                         src: "https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
                         className: "absolute inset-0 h-full w-full object-cover",
@@ -638,7 +637,7 @@ const page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,6675,5217], () => (__webpack_exec__(16137)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,6675,1832], () => (__webpack_exec__(16137)));
 module.exports = __webpack_exports__;
 
 })();

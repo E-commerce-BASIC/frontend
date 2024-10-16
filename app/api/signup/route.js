@@ -11,7 +11,7 @@ export const POST = async (req) => {
       status: 400,
     });
   } else {
-    const check = await axios.post('http://localhost:8080/register_login/register', {
+    const check = await axios.post(`${process.env.NEXT_PUBLIC_API}/register_login/register`, {
       username, password, email
     })
     if (check.status == 200) {

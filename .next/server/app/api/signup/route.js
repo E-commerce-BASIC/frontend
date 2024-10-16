@@ -133,7 +133,7 @@ const POST = async (req)=>{
             status: 400
         });
     } else {
-        const check = await axios/* default */.Z.post("http://localhost:8080/register_login/register", {
+        const check = await axios/* default */.Z.post(`${"https://api.souqbay.com"}/register_login/register`, {
             username,
             password,
             email
