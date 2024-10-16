@@ -495,7 +495,7 @@ const Signup = ()=>{
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                                 className: "mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl",
-                                children: "Welcome to Shop \uD83D\uDED2"
+                                children: "waleed \uD83D\uDED2"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                 className: "mt-4 leading-relaxed text-gray-500",
@@ -715,7 +715,7 @@ const page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,6675,4233], () => (__webpack_exec__(3404)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,6675,5217], () => (__webpack_exec__(3404)));
 module.exports = __webpack_exports__;
 
 })();
