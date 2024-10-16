@@ -124,8 +124,7 @@ __webpack_require__.d(__webpack_exports__, {
 var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
-  POST: () => (POST),
-  dynamic: () => (dynamic)
+  POST: () => (POST)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -139,16 +138,14 @@ var next_response = __webpack_require__(89335);
 const external_bcrypt_namespaceObject = require("bcrypt");
 // EXTERNAL MODULE: ./node_modules/jsonwebtoken/index.js
 var jsonwebtoken = __webpack_require__(69877);
-// EXTERNAL MODULE: ./node_modules/next/headers.js
-var headers = __webpack_require__(40063);
 // EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 48 modules
 var axios = __webpack_require__(62410);
 ;// CONCATENATED MODULE: ./app/api/login/route.js
-const dynamic = "force-dynamic"; // Add this line to force dynamic rendering
+// export const dynamic = "force-dynamic"; // Add this line to force dynamic rendering
 
 
 
-
+// import { cookies } from "next/headers";
 
 const POST = async (req)=>{
     try {
@@ -164,21 +161,25 @@ const POST = async (req)=>{
             username,
             password
         });
-        if (check.status === 200) {
-            (0,headers.cookies)().set(process.env.authToken, check.data.token, {
-                httpOnly: true,
-                maxAge: 60 * 60 * 24 * 7
-            });
-            return next_response/* default */.Z.json({
-                status: 200,
-                message: "User login successfully"
-            });
-        } else {
-            return next_response/* default */.Z.json({
-                message: "Login failed",
-                status: 200
-            });
-        }
+        return next_response/* default */.Z.json({
+            status: 200,
+            message: "User login successfully"
+        });
+    // if (check.status === 200) {
+    //   cookies().set(process.env.authToken, check.data.token, {
+    //     httpOnly: true,
+    //     maxAge: 60 * 60 * 24 * 7,
+    //   });
+    //   return NextResponse.json({
+    //     status: 200,
+    //     message: "User login successfully",
+    //   });
+    // } else {
+    //   return NextResponse.json({
+    //     message: "Login failed",
+    //     status: 200,
+    //   });
+    // }
     } catch (error) {
         return next_response/* default */.Z.json({
             status: 500,
@@ -225,7 +226,7 @@ const POST = async (req)=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335,2410,6086], () => (__webpack_exec__(45919)));
+var __webpack_exports__ = __webpack_require__.X(0, [2697,5501,9335,2410,9877], () => (__webpack_exec__(45919)));
 module.exports = __webpack_exports__;
 
 })();

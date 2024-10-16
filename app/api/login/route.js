@@ -1,9 +1,9 @@
-export const dynamic = "force-dynamic"; // Add this line to force dynamic rendering
+// export const dynamic = "force-dynamic"; // Add this line to force dynamic rendering
 
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import axios from 'axios';
 
 export const POST = async (req) => {
@@ -23,22 +23,27 @@ export const POST = async (req) => {
       password,
     });
 
-    if (check.status === 200) {
-      cookies().set(process.env.authToken, check.data.token, {
-        httpOnly: true,
-        maxAge: 60 * 60 * 24 * 7,
-      });
+    return NextResponse.json({
+      status: 200,
+      message: "User login successfully",
+    });
 
-      return NextResponse.json({
-        status: 200,
-        message: "User login successfully",
-      });
-    } else {
-      return NextResponse.json({
-        message: "Login failed",
-        status: 200,
-      });
-    }
+    // if (check.status === 200) {
+    //   cookies().set(process.env.authToken, check.data.token, {
+    //     httpOnly: true,
+    //     maxAge: 60 * 60 * 24 * 7,
+    //   });
+
+    //   return NextResponse.json({
+    //     status: 200,
+    //     message: "User login successfully",
+    //   });
+    // } else {
+    //   return NextResponse.json({
+    //     message: "Login failed",
+    //     status: 200,
+    //   });
+    // }
   } catch (error) {
     return NextResponse.json({
       status: 500,
