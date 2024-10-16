@@ -1,25 +1,15 @@
-// import User from "@/models/User"; // Not used in the current code
+export const dynamic = "force-dynamic"; // Add this line to force dynamic rendering
+
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import axios from 'axios';
 
-async function getCookieData() {
-  const cookieData = cookies().getAll()
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(cookieData)
-    }, 1000)
-  )
-}
-
-
 export const POST = async (req) => {
   try {
     const { username, password } = await req.json();
 
-    // Check if the username and password are provided
     if (!username || !password) {
       return NextResponse.json({
         message: "Please fill all the fields",
@@ -27,18 +17,16 @@ export const POST = async (req) => {
       });
     }
 
-    // POST request to your external API (replace with the correct endpoint)
+    // Make your POST request to the external API
     const check = await axios.post(`${process.env.api}/register_login/login`, {
       username,
       password,
     });
 
-    // If the request is successful and the status is 200
     if (check.status === 200) {
-      // Set the cookie using cookies() from next/headers
-      getCookieData().set(process.env.authToken, check.data.token, {
+      cookies().set(process.env.authToken, check.data.token, {
         httpOnly: true,
-        maxAge: 60 * 60 * 24 * 7, // 7 days
+        maxAge: 60 * 60 * 24 * 7,
       });
 
       return NextResponse.json({
@@ -46,14 +34,12 @@ export const POST = async (req) => {
         message: "User login successfully",
       });
     } else {
-      // If no specific error, still respond with a successful status but no login
       return NextResponse.json({
         message: "Login failed",
         status: 200,
       });
     }
   } catch (error) {
-    console.error("Error during login:", error); // For better debugging
     return NextResponse.json({
       status: 500,
       message: "Something went wrong",
