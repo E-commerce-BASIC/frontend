@@ -24,6 +24,7 @@ const Header = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       const res = await axios.get("/api/category/header_menu_categories");
+      console.log(res,"<-------------")
       setCategories(res?.data.data);
     };
     fetchCategories();
