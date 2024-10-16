@@ -124,7 +124,8 @@ __webpack_require__.d(__webpack_exports__, {
 var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
-  POST: () => (POST)
+  POST: () => (POST),
+  dynamic: () => (dynamic)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -143,37 +144,28 @@ var headers = __webpack_require__(40063);
 // EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 48 modules
 var axios = __webpack_require__(62410);
 ;// CONCATENATED MODULE: ./app/api/login/route.js
-// import User from "@/models/User"; // Not used in the current code
+const dynamic = "force-dynamic"; // Add this line to force dynamic rendering
 
 
 
 
 
-async function getCookieData() {
-    const cookieData = (0,headers.cookies)().getAll();
-    return new Promise((resolve)=>setTimeout(()=>{
-            resolve(cookieData);
-        }, 1000));
-}
 const POST = async (req)=>{
     try {
         const { username, password } = await req.json();
-        // Check if the username and password are provided
         if (!username || !password) {
             return next_response/* default */.Z.json({
                 message: "Please fill all the fields",
                 status: 400
             });
         }
-        // POST request to your external API (replace with the correct endpoint)
+        // Make your POST request to the external API
         const check = await axios/* default */.Z.post(`${process.env.api}/register_login/login`, {
             username,
             password
         });
-        // If the request is successful and the status is 200
         if (check.status === 200) {
-            // Set the cookie using cookies() from next/headers
-            getCookieData().set(process.env.authToken, check.data.token, {
+            (0,headers.cookies)().set(process.env.authToken, check.data.token, {
                 httpOnly: true,
                 maxAge: 60 * 60 * 24 * 7
             });
@@ -182,14 +174,12 @@ const POST = async (req)=>{
                 message: "User login successfully"
             });
         } else {
-            // If no specific error, still respond with a successful status but no login
             return next_response/* default */.Z.json({
                 message: "Login failed",
                 status: 200
             });
         }
     } catch (error) {
-        console.error("Error during login:", error); // For better debugging
         return next_response/* default */.Z.json({
             status: 500,
             message: "Something went wrong"
