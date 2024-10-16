@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import axios from "axios";
 
+export const dynamic = 'force-dynamic';
+
 export const POST = async (req) => {
   const authToken = cookies().get(process.env.authToken)?.value || "";
   try {

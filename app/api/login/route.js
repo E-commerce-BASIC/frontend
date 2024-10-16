@@ -6,6 +6,9 @@ import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import axios from 'axios'
 
+export const dynamic = 'force-dynamic';
+
+
 export const POST = async (req) => {
 
   const { username, password } = await req.json();

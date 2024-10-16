@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import axios from 'axios'
 import { cookies } from "next/headers";
 
+export const dynamic = 'force-dynamic';
 
 export const POST = async (req) => {
   const authToken = cookies().get(process.env.authToken)?.value || "";

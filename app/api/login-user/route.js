@@ -4,6 +4,9 @@ import jwt from "jsonwebtoken";
 // import User from "@/models/User";
 import { NextResponse } from "next/server";
 import axios from "axios";
+
+export const dynamic = 'force-dynamic';
+
 export const GET = async (req) => {
 
   const authToken = cookies().get(process.env.authToken)?.value || "";
