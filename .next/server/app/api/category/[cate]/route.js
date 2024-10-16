@@ -110,8 +110,7 @@ __webpack_require__.d(__webpack_exports__, {
 var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
-  POST: () => (POST),
-  dynamic: () => (dynamic)
+  POST: () => (POST)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -126,7 +125,6 @@ var axios = __webpack_require__(62410);
 ;// CONCATENATED MODULE: ./app/api/category/[cate]/route.js
 
 
-const dynamic = "force-dynamic";
 const POST = async (req, { params })=>{
     try {
         const category = params.cate;
