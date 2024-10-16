@@ -110,8 +110,7 @@ __webpack_require__.d(__webpack_exports__, {
 var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
-  GET: () => (GET),
-  dynamic: () => (dynamic)
+  GET: () => (GET)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -127,7 +126,6 @@ var axios = __webpack_require__(62410);
 // pages/api/category/all_product.js
 
 
-const dynamic = "force-dynamic";
 const GET = async (req)=>{
     try {
         const { data } = await axios/* default */.Z.get(`${process.env.api}/category/find_all_categories`, {

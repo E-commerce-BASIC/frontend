@@ -124,8 +124,7 @@ __webpack_require__.d(__webpack_exports__, {
 var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
-  GET: () => (GET),
-  dynamic: () => (dynamic)
+  GET: () => (GET)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -148,7 +147,6 @@ var axios = __webpack_require__(62410);
 // import User from "@/models/User";
 
 
-const dynamic = "force-dynamic";
 const GET = async (req)=>{
     const authToken = (0,headers.cookies)().get(process.env.authToken)?.value || "";
     try {

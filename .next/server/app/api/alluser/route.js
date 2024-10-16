@@ -33,8 +33,7 @@ __webpack_require__.d(__webpack_exports__, {
 var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
-  GET: () => (GET),
-  dynamic: () => (dynamic)
+  GET: () => (GET)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -46,7 +45,6 @@ var module_default = /*#__PURE__*/__webpack_require__.n(app_route_module);
 var next_response = __webpack_require__(89335);
 ;// CONCATENATED MODULE: ./app/api/alluser/route.js
 
-const dynamic = "force-dynamic";
 const GET = async (req)=>{
     try {
         // const user = await User.find({});
