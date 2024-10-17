@@ -57,6 +57,7 @@ const Footer = () => {
           <Image
             src="https://images.unsplash.com/photo-1642370324100-324b21fab3a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
             alt="footer"
+            layout="fill"
             className="absolute inset-0 h-full w-full object-cover"
           />
         </div>

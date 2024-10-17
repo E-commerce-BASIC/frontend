@@ -47,24 +47,23 @@ export const ProductContextProvider = ({ children }) => {
         toast.error("Please wait while image is uploading");
         return;
       }
-      const res = await axios.post("/api/product", formData, {
-        headers: {
-          "Content-Type": "multipart/formdata",
-        },
-      });
-      setName(""),
-        setPrice(""),
-        setDescription(""),
-        setCategory(""),
-        setFile(null),
-        setMedia(""),
-        setUploading(false),
-        setSelectedTags([]),
-        setquantity(""),
-        setbrand(""),
-        setrating(""),
-        setdiscount(""),
-        setvariants("");
+      await axios
+        .post(process.env.NEXT_PUBLIC_API + "/product", formData)
+        .then((x) => {
+          setName(""),
+            setPrice(""),
+            setDescription(""),
+            setCategory(""),
+            setFile(null),
+            setMedia(""),
+            setUploading(false),
+            setSelectedTags([]),
+            setquantity(""),
+            setbrand(""),
+            setrating(""),
+            setdiscount(""),
+            setvariants("");
+        });
     } catch (error) {
       toast.error(error.message);
       console.log(error);
@@ -73,11 +72,15 @@ export const ProductContextProvider = ({ children }) => {
     }
   };
   //  get all products
+  const getproducts = async () =>{
+    await axios.get(process.env.NEXT_PUBLIC_API + "/product/getallproduct")
+    .then(x=>{
+      console.log(x,",_----")
+      setProducts(x.data)
+    })
+}
   useEffect(() => {
-    axios.get("/api/product").then((res) => {
-      // console.log(res,"<======")
-      setProducts(res.data);
-    });
+    getproducts();
   }, []);
   return (
     <ProductContext.Provider

@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+export const dynamic = 'force-dynamic';
+
 const Category = ({ params }) => {
   const [data, setData] = useState([]);
   useEffect(() => {

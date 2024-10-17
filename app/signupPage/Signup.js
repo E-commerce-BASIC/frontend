@@ -20,6 +20,7 @@ const Signup = () => {
             alt="Pattern"
             src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
             className="absolute inset-0 h-full w-full object-cover"
+            objectFit="cover"
             height={100}
             width={100}
           />
@@ -51,7 +52,7 @@ const Signup = () => {
             </Link>
 
             <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-               Welcome to Shop  🛒
+              Welcome to Shop 🛒
             </h1>
 
             <p className="mt-4 leading-relaxed text-gray-500">

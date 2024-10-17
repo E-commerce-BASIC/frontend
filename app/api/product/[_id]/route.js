@@ -3,6 +3,7 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
 
 export const GET = async (req, { params }) => {
    

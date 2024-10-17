@@ -1,4 +1,3 @@
-
 import { ProductContext } from "@/Context/CreateProduct";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +7,7 @@ import CardSkeleton from "./CardSkeleton";
 const HomeProducts = ({ show }) => {
   const { products } = useContext(ProductContext);
 
-  if (!products?.data) {
+  if (!products) {
     return (
       <div
         className={`bg-white mx-auto ${show ? "w-full lg:w-10/12" : "w-full"}`}
@@ -17,6 +16,7 @@ const HomeProducts = ({ show }) => {
       </div>
     );
   }
+  // console.log(products,"<--0909")
   return (
     <div>
       <div className={`bg-white mx-auto ${show ? "w-10/12" : "w-full"}`}>
@@ -25,11 +25,12 @@ const HomeProducts = ({ show }) => {
 
           <div className=" grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-6">
             {show
-              ? products?.data
+              ? products
                   ?.slice(-4)
                   .map((product) => (
                     <Link
-                      href={`/products/${product?.id}`}
+                      // href={`/products/${product?.id}`}
+                      href={`/products/id?search=${product?.id}`}
                       key={product?.id}
                       className="group"
                     >
@@ -37,7 +38,11 @@ const HomeProducts = ({ show }) => {
                         <Image
                           width={500}
                           height={400}
-                          src={process.env.NEXT_PUBLIC_API+'/uploads/'+product?.image}
+                          src={
+                            process.env.NEXT_PUBLIC_API +
+                            "/uploads/" +
+                            product?.image
+                          }
                           alt={product?.name}
                           className="h-full w-full object-cover object-center group-hover:opacity-75"
                         />
@@ -51,9 +56,9 @@ const HomeProducts = ({ show }) => {
                     </Link>
                   ))
                   .reverse()
-              : products?.data?.map((product) => (
+              : products?.map((product) => (
                   <Link
-                    href={`/products/${product?.id}`}
+                    href={`/products/id?search=${product?.id}`}
                     key={product?.id}
                     className="group"
                   >
@@ -61,7 +66,11 @@ const HomeProducts = ({ show }) => {
                       <Image
                         width={300}
                         height={300}
-                        src={process.env.NEXT_PUBLIC_API+'/uploads/'+product?.image}
+                        src={
+                          process.env.NEXT_PUBLIC_API +
+                          "/uploads/" +
+                          product?.image
+                        }
                         alt={product?.name}
                         className="h-full w-full object-cover object-center group-hover:opacity-75"
                       />

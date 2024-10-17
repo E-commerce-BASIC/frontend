@@ -172,14 +172,14 @@ export default function Foter() {
           </div>
 
           <div className="w-full sm:w-1/3 text-center mt-3 lg:mt-0">
-            <Image
+            {/* <Image
               src="https://moyenxpress.com/public/uploads/all/cUdkA7ASDHLuE29YC4TxxJyFSY0DOVKLFmbzaiw0.png"
               className="w-1/2 mx-auto lg:mx-0"
               alt="Payment Methods"
               loading="lazy"
               height={100}
               width={100}
-            />
+            /> */}
           </div>
         </div>
       </div>

@@ -26,12 +26,12 @@ export default function Carousel_card({ show }) {
       {/* Added relative positioning here */}
       <Carousel className="h-auto w-full md:hidden">
         <CarouselContent>
-          {chunkArray(products?.data?.slice(), 2).map((group, i) => (
+          {chunkArray(products?.slice(), 2).map((group, i) => (
             <CarouselItem key={i}>
               <div className="flex justify-evenly w-full space-x-4">
                 {group.map((productItem) => (
                   <Link
-                    href={`/products/${productItem?.id}`}
+                    href={`/products/id?search=${productItem?.id}`}
                     key={productItem?.id}
                     className="group"
                   >
@@ -47,7 +47,7 @@ export default function Carousel_card({ show }) {
 
                         {/* Product Image */}
                         <div className="flex justify-center mt-4">
-                        <Image
+                          <Image
                             src={
                               process.env.NEXT_PUBLIC_API +
                               "/uploads/" +
@@ -85,12 +85,12 @@ export default function Carousel_card({ show }) {
       </Carousel>
       <Carousel className="h-auto w-full hidden md:flex">
         <CarouselContent>
-          {chunkArray(products?.data?.slice(), 5).map((group, i) => (
+          {chunkArray(products?.slice(), 5).map((group, i) => (
             <CarouselItem key={i}>
               <div className="flex justify-evenly w-full">
                 {group.map((productItem) => (
                   <Link
-                    href={`/products/${productItem?.id}`}
+                    href={`/products/id?search=${productItem?.id}`}
                     key={productItem?.id}
                     className="group"
                   >
@@ -106,7 +106,7 @@ export default function Carousel_card({ show }) {
 
                         {/* Product Image */}
                         <div className="flex justify-center mt-4">
-                        <Image
+                          <Image
                             src={
                               process.env.NEXT_PUBLIC_API +
                               "/uploads/" +

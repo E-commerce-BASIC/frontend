@@ -9,27 +9,40 @@ import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 
 const Header = () => {
-  const { tracking, setTracking, TrackingData, setTrackingData } =
-    useContext(Context);
+  const {
+    tracking,
+    setTracking,
+    TrackingData,
+    setTrackingData,
+    categories,
+    setCategories,
+  } = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { user, handleLogout } = useContext(Context);
-  const [categories, setCategories] = useState([]);
+
   const [isHovered, setIsHovered] = useState(false);
   const [Search, setSearch] = useState(0);
 
-  const name = user?.data?.Info?.username.replace(/ .*/, "");
-  console.log(user);
+  const name = user?.Info?.username.replace(/ .*/, "");
+  // console.log(user.Info?.username);
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const res = await axios.get("/api/category/header_menu_categories");
-      console.log(res,"<-------------")
-      setCategories(res?.data.data);
+      // const res = await axios.get("/api/category/header_menu_categories");
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API}/category/find_all_categories`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setCategories(data?.data);
     };
     fetchCategories();
   }, []);
-  
+
   const SearchTracking = async (e) => {
     e.preventDefault();
     const search = await axios.post("/api/order/tracking", { Search });
@@ -165,7 +178,7 @@ const Header = () => {
               >
                 <BsBag fontSize={19} />
               </span>
-              {user?.data ? (
+              {user?.Info ? (
                 <div className="sm:flex sm:gap-4">
                   <span className="hidden rounded-md bg-gray-100 px-4 py-2.5 text-sm font-medium text-[#2f4550] transition hover:text-[#2f4550]/75 sm:block">
                     {name}

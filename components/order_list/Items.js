@@ -42,7 +42,7 @@ export default function Items({
       </div>
       <div className="text-sm text-white">{date}</div>
 
-      {router != "/dashboard/Orders" ? (
+      {router != "/admin/Orders" ? (
         <span
           className={`text-white ${
             (Processing == "Completed" && "bg-green-500") ||

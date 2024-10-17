@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 import { debounce } from "lodash";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import { decode } from "jsonwebtoken";
 
 export const Context = createContext();
 const ContextProvider = ({ children }) => {
@@ -13,6 +15,7 @@ const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [tracking, setTracking] = useState(false);
   const [TrackingData, setTrackingData] = useState({});
+  const [categories, setCategories] = useState([]);
   const [signup, setSignUp] = useState({
     username: "",
     email: "",
@@ -24,26 +27,59 @@ const ContextProvider = ({ children }) => {
   });
   const router = useRouter();
   // sign up user
+  // const handleSignUpSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   try {
+  //     const response = await axios.post("/api/signup", signup);
+  //     // console.log({response},"<-------------")
+  //     setLoading(false);
+  //     setError(response.data.status !== 201);
+  //     setMessage(response.data.message);
+
+  //     if (response.data.message === "User Registered Successfully") {
+  //       router.push("/loginpage");
+  //       toast.success("User created successfully");
+  //       setSignUp({
+  //         username: "",
+  //         email: "",
+  //         password: "",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     setLoading(false);
+  //     setError(true);
+  //   }
+  // };
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await axios.post("/api/signup", signup);
-      // console.log({response},"<-------------")
-      setLoading(false);
-      setError(response.data.status !== 201);
-      setMessage(response.data.message);
+      await axios
+        .post(`${process.env.NEXT_PUBLIC_API}/register_login/register`, {
+          username: signup.username,
+          password: signup.password,
+          email: signup.email,
+        })
+        .then((x) => {
+          console.log(x, "<--------");
+          setLoading(false);
+          setError(x.status !== 201);
+          setMessage(x.data);
 
-      if (response.data.message === "User Registered Successfully") {
-        router.push("/loginpage");
-        toast.success("User created successfully");
-        setSignUp({
-          username: "",
-          email: "",
-          password: "",
+          if (x.data === "User Registered Successfully") {
+            router.push("/loginpage");
+            toast.success("User created successfully");
+            setSignUp({
+              username: "",
+              email: "",
+              password: "",
+            });
+          }
         });
-      }
     } catch (error) {
       console.error(error);
       setLoading(false);
@@ -52,20 +88,60 @@ const ContextProvider = ({ children }) => {
   };
 
   // login user
+  // const handleLoginSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   try {
+  //     const response = await axios.post("/api/login", login);
+  //     setLoading(false);
+  //     setError(response.data.status !== 201);
+  //     setMessage(response.data.message);
+
+  //     if (response.data.message === "User login successfully") {
+  //       router.push("/");
+
+  //       toast.success("User login successfully");
+  //       setLogin({
+  //         username: "",
+  //         password: "",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     setLoading(false);
+  //     setError(true);
+  //   }
+  // };
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await axios.post("/api/login", login);
-      setLoading(false);
-      setError(response.data.status !== 201);
-      setMessage(response.data.message);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/register_login/login`,
+        {
+          username: login.username,
+          password: login.password,
+        }
+      );
 
-      if (response.data.message === "User login successfully") {
+      setLoading(false);
+      setError(response.status !== 201);
+      setMessage(response.data.message);
+      // console.log(response)
+      if (response.data.message === "Logged in successfully") {
+        // Set cookies here, assuming token or user info is returned in response
+        const token = response.data.token; // Modify based on your API response structure
+        Cookies.set(process.env.NEXT_PUBLIC_authToken, token, { expires: 7 }); // Cookie expires in 7 days
+
+        // Navigate to the home page after successful login
         router.push("/");
 
-        toast.success("User login successfully");
+        // Show a success notification
+        toast.success("Logged in successfully");
+
+        // Reset the login form
         setLogin({
           username: "",
           password: "",
@@ -91,8 +167,17 @@ const ContextProvider = ({ children }) => {
     let debouncedCurrentUser;
     const fetchUser = async () => {
       try {
-        const response = await axios.get("/api/login-user");
-        setUser(response.data);
+        const authToken = Cookies.get(process.env.NEXT_PUBLIC_authToken) || "";
+
+        await axios
+          .get(process.env.NEXT_PUBLIC_API + "/user/info", {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          })
+          .then((response) => {
+            setUser(response.data);
+          });
       } catch (error) {
         setUser(null);
         console.log(error);
@@ -104,7 +189,7 @@ const ContextProvider = ({ children }) => {
     return () => {
       debouncedCurrentUser.cancel();
     };
-  }, [login]);
+  }, []);
 
   // logout user
 
@@ -141,6 +226,8 @@ const ContextProvider = ({ children }) => {
         setTracking,
         TrackingData,
         setTrackingData,
+        categories,
+        setCategories,
       }}
     >
       {children}

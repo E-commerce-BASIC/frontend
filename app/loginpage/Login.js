@@ -4,6 +4,7 @@ import Loader from "@/components/Loader";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const { loading, error, message, login, setLogin, handleLoginSubmit } =
@@ -19,8 +20,16 @@ const Login = () => {
       <section className="relative flex flex-wrap lg:h-screen lg:items-center">
         <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-lg text-center">
+            {/* <button
+              onClick={() => {
+                const cookie = Cookies.get(process.env.NEXT_PUBLIC_authToken);
+                console.log({ cookie });
+              }}
+            >
+              cookie
+            </button> */}
             <h1 className="text-2xl font-bold sm:text-3xl">
-               Welcome to Shop  🛒
+              Welcome to Shop 🛒
             </h1>
 
             <p className="mt-4 text-gray-500">

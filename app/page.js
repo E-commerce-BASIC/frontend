@@ -35,7 +35,7 @@ export default function Home() {
         <Bg_img />
         <BG_Card />
         <Coming_soon_2 />
-        <Country_card />
+        {/* <Country_card /> */}
         <Carousel_card />
        
         {/* <HomeProducts show={show} /> */}
