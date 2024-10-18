@@ -91,7 +91,6 @@ const Form = () => {
 
   useEffect(() => {
     const res = async () => {
-      // const response = await axios.get("/api/tags");
       const Tag = await axios.get(process.env.NEXT_PUBLIC_API + '/tag')
       // console.log(Tag)
       setTags(Tag.data);

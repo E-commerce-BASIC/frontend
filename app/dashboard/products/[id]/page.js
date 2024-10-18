@@ -12,13 +12,13 @@ const Product = () => {
   const route = useRouter();
 
   // get product details
-  useEffect(() => {
-    const GetProductDetails = async () => {
-      const res = await axios.get(`/api/allproducts/${params.id}`);
-      setProduct(res?.data?.data);
-    };
-    GetProductDetails();
-  }, [params]);
+  // useEffect(() => {
+  //   const GetProductDetails = async () => {
+  //     const res = await axios.get(`/api/allproducts/${params.id}`);
+  //     setProduct(res?.data?.data);
+  //   };
+  //   GetProductDetails();
+  // }, [params]);
 
   const handleInputChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });

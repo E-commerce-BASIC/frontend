@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: "server",
+  output: "export",
   // eslint: {
   //   ignoreDuringBuilds: true,
   // },
@@ -15,14 +15,14 @@ const nextConfig = {
       "souqbay.com",
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: "/invoices/:path*",
-        destination: "https://souqbay.com/invoices/:path*", // Proxy to Backend
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/invoices/:path*",
+  //       destination: "https://souqbay.com/invoices/:path*", // Proxy to Backend
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = nextConfig;

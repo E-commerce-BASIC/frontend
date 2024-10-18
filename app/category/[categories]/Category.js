@@ -5,19 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export const dynamic = 'force-dynamic';
-
 const Category = ({ params }) => {
   const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.post(`/api/category/${params}`);
-      setData(res.data.data);
-    };
-    fetchData();
-    window.scrollTo(0, 0);
-  }, [params]);
-console.log(data)
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const res = await axios.post(`/api/category/${params}`);
+//       setData(res.data.data);
+//     };
+//     fetchData();
+//     window.scrollTo(0, 0);
+//   }, [params]);
+// console.log(data)
   // if (!data[0]?.mainImage) {
   //   return (
   //     <div className="w-full lg:w-11/12 mx-auto my-4">

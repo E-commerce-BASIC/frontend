@@ -6,6 +6,7 @@ import { Context } from "@/Context/Context";
 import Image from "next/image";
 import axios from "axios";
 import Button from "@/utils/Button";
+import Cookies from "js-cookie";
 
 const SideCart = ({ setIsCartOpen, isCartOpen }) => {
   const { user } = useContext(Context);
@@ -14,45 +15,57 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
     (total, order) =>
       total +
       order?.order_items?.reduce(
-        (subtotal, orderItem) => subtotal + orderItem?.price * orderItem?.quantity,
+        (subtotal, orderItem) =>
+          subtotal + orderItem?.price * orderItem?.quantity,
         0
       ),
     0
   );
 
-
-  const getCart = async () => {
-    try {
-      const res = await axios.get("/api/cart-item");
-      // if (res?.data?.cartItem?.length === 0) {
-      //   return null;
-      // }
-
-      setUserCart(res?.data?.cartItem);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   // get user cart data
+  const First_run = async () => {
+    const authToken = await Cookies.get(process.env.NEXT_PUBLIC_authToken);
+
+    await axios
+      .get(process.env.NEXT_PUBLIC_API + "/order/Cart", {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
+      .then(
+        (x) => (
+          setUserCart(x.data[0].order_items), setSubTotal(x.data[0].Total_price)
+        )
+      )
+      .catch((x) => console.log(x));
+  };
+
   useEffect(() => {
-    user && getCart();
+    First_run();
   }, [user]);
-  // console.log(usersCart)
-  // console.log(user?.data)       
-  // remove item from cart
+
   const removeItem = async (productId) => {
     try {
-      const res = await axios.post("/api/cart-item/item-delete", {
-        id: productId ,
-      });
-      if (res.status === 200) {
-        getCart()
+      const authToken = await Cookies.get(process.env.NEXT_PUBLIC_authToken);
+      // const res = await axios.post("/api/cart-item/item-delete", {
+      //   id: productId,
+      // });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/order/delete_item`,
+        { product_id: productId }, // This is the correct place for the body
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        First_run();
       }
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   return (
     <Transition.Root as={Fragment} show={isCartOpen}>
@@ -108,7 +121,7 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
 
                       <div className="mt-8">
                         <div className="flow-root">
-                          {user?.data?.Info ? (
+                          {user?.Info ? (
                             <ul
                               role="list"
                               className="-my-6 divide-y divide-gray-200"
@@ -118,65 +131,63 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
                                   ?.map((user, userIndex) => {
                                     return (
                                       <React.Fragment key={userIndex}>
-                                       {
-                                        user.order_items.map((Items,i)=>{
-                                          return(
-                                            <>
-                                            <li
-                                              key={user?.id}
-                                              className="flex py-6"
-                                            >
-                                              <Link
-                                                href={`/products/${Items?.product?.id}`}
-                                                className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md"
-                                              >
-                                                <Image
-                                                  height={200}
-                                                  width={200}
-                                                  src={process.env.NEXT_PUBLIC_API+'/uploads/'+Items?.product?.image}
-                                                  alt={Items?.product?.name}
-                                                  className="h-full w-full object-contain object-center"
-                                                />
-                                              </Link>
-  
-                                              <div className="ml-4 flex flex-1 flex-col">
-                                                <div>
-                                                  <div className="flex justify-between text-base font-medium text-gray-900">
-                                                    <h3>
-                                                      <a href={Items?.product?.id}>
-                                                        {Items?.product?.name}
-                                                      </a>
-                                                    </h3>
-  
-                                                    <p className="ml-4">
-                                                      ${Items?.product?.price}
-                                                    </p>
-                                                  </div>
-                                                </div>
-                                              
-                                                <div className="flex flex-1 items-end justify-between text-sm">
-                                                  <p className="text-gray-500">
-                                                    Qty {Items?.quantity}
-                                                  </p>
-  
-                                                  <div className="flex">
-                                                    <button
-                                                      onClick={() =>
-                                                        removeItem(Items?.product?.id)
-                                                      }
-                                                      type="button"
-                                                      className="font-medium text-[#2f4550] hover:text-[#2f4550]"
-                                                    >
-                                                      Remove
-                                                    </button>
-                                                  </div>
-                                                </div>
+                                        <li
+                                          key={user?.id}
+                                          className="flex py-6"
+                                        >
+                                          <Link
+                                            href={`/products/id?search=${user?.product?.id}`}
+                                            className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md"
+                                          >
+                                            <Image
+                                              height={200}
+                                              width={200}
+                                              src={
+                                                process.env.NEXT_PUBLIC_API +
+                                                "/uploads/" +
+                                                user?.product?.image
+                                              }
+                                              alt={user?.product?.name}
+                                              className="h-full w-full object-contain object-center"
+                                            />
+                                          </Link>
+
+                                          <div className="ml-4 flex flex-1 flex-col">
+                                            <div>
+                                              <div className="flex justify-between text-base font-medium text-gray-900">
+                                                <h3>
+                                                  <a href={user?.product?.id}>
+                                                    {user?.product?.name}
+                                                  </a>
+                                                </h3>
+
+                                                <p className="ml-4">
+                                                  ${user?.product?.price}
+                                                </p>
                                               </div>
-                                            </li>
-                                          </>
-                                          )
-                                        })
-                                       }
+                                            </div>
+
+                                            <div className="flex flex-1 items-end justify-between text-sm">
+                                              <p className="text-gray-500">
+                                                Qty {user?.quantity}
+                                              </p>
+
+                                              <div className="flex">
+                                                <button
+                                                  onClick={() =>
+                                                    removeItem(
+                                                      user?.product?.id
+                                                    )
+                                                  }
+                                                  type="button"
+                                                  className="font-medium text-[#2f4550] hover:text-[#2f4550]"
+                                                >
+                                                  Remove
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </li>
                                       </React.Fragment>
                                     );
                                   })
@@ -217,14 +228,15 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
                         </p>
                       )}
                       <div className="mt-6">
-                        {user?.data ? (
+                        {user?.Info ? (
                           <div
-                            className={`w-full mx-auto ${totalPrice <= 0
+                            className={`w-full mx-auto ${
+                              totalPrice <= 0
                                 ? "opacity-50 cursor-not-allowed"
                                 : ""
-                              }`}
+                            }`}
                           >
-                            <Button setIsCartOpen={setIsCartOpen}/>
+                            <Button setIsCartOpen={setIsCartOpen} />
                           </div>
                         ) : (
                           <Link

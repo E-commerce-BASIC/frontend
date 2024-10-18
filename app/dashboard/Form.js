@@ -132,14 +132,14 @@ const Form = () => {
     setSelectedTags([]); // Clear selected tags when changing category
   };
 
-  useEffect(() => {
-    const res = async () => {
-      const response = await axios.get("/api/tags");
-      setTags(response.data.data)
-    }
+  // useEffect(() => {
+  //   const res = async () => {
+  //     const response = await axios.get("/api/tags");
+  //     setTags(response.data.data)
+  //   }
 
-    res()
-  }, [])
+  //   res()
+  // }, [])
   // const Tags = [
   //   { id: 1, category: 'clothes', tag_name: 'T-Shirts' },
   //   { id: 2, category: 'clothes', tag_name: 'Jeans' },

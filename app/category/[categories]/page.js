@@ -2,7 +2,7 @@
 import { useParams } from "next/navigation";
 import Category from "./Category";
 
-export const dynamic = 'force-dynamic';
+  
 
 const Cate = () => {
   const params = useParams();

@@ -5,6 +5,7 @@ import Installment_Modal from "@/components/Modal/Installment_Modal";
 import RelatedProducts from "@/components/RelatedProducts";
 import Skeleton from "@/components/Skeleton";
 import axios from "axios";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
@@ -26,18 +27,15 @@ const Product = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      //   const res = await axios.get(`/api/product/${searchQuery}`);
       const products = await axios
         .get(process.env.NEXT_PUBLIC_API + `/product/getproduct/${searchQuery}`)
         .then((x) => {
-            console.log(x)
+          console.log(x);
           setProduct(x.data);
         });
-      // console.log('chall gya----->'+)
     };
     fetchProduct();
   }, [searchQuery]);
-  // console.log({product})
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -205,9 +203,10 @@ const Product = () => {
                 </div>
                 <div className="flex flex-wrap items-center -mx-4 ">
                   <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
-                    {user?.data ? (
+                  {/* <button onClick={()=>console.log(Cookies.get(process.env.NEXT_PUBLIC_authToken))}>hello</button> */}
+                    {user?.Info ? (
                       <button
-                        onClick={() => addItemToCart(product)}
+                        onClick={(e) => addItemToCart({product,e})}
                         className="flex items-center bg-black justify-center w-full p-3 text-gray-200 font-semibold border border-gray-500 rounded-md  hover:bg-gray-800 hover:border-gray-600 hover:text-gray-50"
                       >
                         Add to Cart

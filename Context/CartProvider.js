@@ -3,6 +3,7 @@ import axios from "axios";
 import { createContext, useContext, useState } from "react";
 import { Context } from "./Context";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 
 export const CartContext = createContext();
 
@@ -13,20 +14,27 @@ const CartProvider = ({ children }) => {
   });
 
   // add item to cart
-  const addItemToCart = async (e) => {
+  const addItemToCart = async ({ product, e }) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const authToken = Cookies.get(process.env.NEXT_PUBLIC_authToken) || "";
+    // console.log(product)
     try {
-      const res = await axios.post("/api/cart", {
-        items: [
-          {
-            productId: e.id,
-            image: e.mainImage,
-            price: e.price,
-            name: e.name,
-            quantity: cartdetails.quantity,
+      const cartItem = await axios.post(
+        process.env.NEXT_PUBLIC_API + "/order",
+        {
+          product_id: product.id,
+          quantity: cartdetails.quantity,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
           },
-        ],
-      });
-      res?.data?.message === "Item added" ? toast.success(res?.data?.message) : toast.error(res?.data?.message);
+        }
+      );
+      // console.log(cartItem?.data?.order, ",------cart item");
+      cartItem?.data?.order
+        ? toast.success("Item Added")
+        : toast.error("error");
       setCartDetails({
         quantity: 1,
       });

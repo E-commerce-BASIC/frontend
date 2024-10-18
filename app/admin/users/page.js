@@ -9,20 +9,20 @@ const User = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
-  useEffect(() => {
-    const AllUser = async () => {
-      const { data } = await axios.get("/api/alluser");
-      setUser(data.data);
-    };
-    AllUser();
-  }, []);
+  // useEffect(() => {
+  //   const AllUser = async () => {
+  //     const { data } = await axios.get("/api/alluser");
+  //     setUser(data.data);
+  //   };
+  //   AllUser();
+  // }, []);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = user.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = user?.slice(indexOfFirstItem, indexOfLastItem);
 
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(user.length / itemsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(user?.length / itemsPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -32,7 +32,7 @@ const User = () => {
         <h1 className="text-2xl font-bold text-gray-800 p-1 m-2">
           Users
           <span className="text-sm text-gray-500 font-normal">
-            ({user.length})
+            ({user?.length})
           </span>
         </h1>
       </div>
@@ -43,8 +43,8 @@ const User = () => {
           <div className="font-bold">Role</div>
         </div>
 
-        {currentItems.length ? (
-          currentItems.map((item, index) => (
+        {currentItems&&currentItems?.length ? (
+          currentItems?.map((item, index) => (
             <div
               key={item?._id}
               className={`w-full border grid  md:grid-cols-3 text-sm gap-4 py-4 px-1 md:p-4 hover:bg-gray-200 transition-all duration-200  ${
@@ -63,7 +63,7 @@ const User = () => {
         )}
 
         <div className="flex justify-center mt-4">
-          {pageNumbers.length > 1 &&
+          {pageNumbers&&pageNumbers?.length > 1 &&
             pageNumbers.map((number) => (
               <button
                 key={number}

@@ -13,16 +13,16 @@ const Products = () => {
 
   useEffect(() => {
     const Allproducts = async () => {
-      const { data } = await axios.get("/api/allproducts");
-      setproducts(data.data);
-      console.log({data},"<------- data")
+      const {data} = await axios.get(process.env.NEXT_PUBLIC_API + '/product/getallproduct')
+      setproducts(data);
+      
     };
     Allproducts();
   }, []);
-
+  
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = products?.slice(indexOfFirstItem, indexOfLastItem);
 
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(products.length / itemsPerPage); i++) {
@@ -50,7 +50,7 @@ const Products = () => {
           currentItems.map((item, index) => (
             <Link
               href={`/admin/products/${item?.id}`}
-              key={item?._id}
+              key={item?.id}
               className={`w-full border grid md:grid-cols-4 text-sm gap-4 py-4 px-1 md:p-4 hover:bg-gray-200 transition-all duration-200 ${
                 index % 2 === 0 ? "bg-gray-100" : "bg-white"
               }`}

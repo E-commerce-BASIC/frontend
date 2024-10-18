@@ -9,13 +9,13 @@ const User = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
-  useEffect(() => {
-    const AllUser = async () => {
-      const { data } = await axios.get("/api/alluser");
-      setUser(data.data);
-    };
-    AllUser();
-  }, []);
+  // useEffect(() => {
+  //   const AllUser = async () => {
+  //     const { data } = await axios.get("/api/alluser");
+  //     setUser(data.data);
+  //   };
+  //   AllUser();
+  // }, []);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
