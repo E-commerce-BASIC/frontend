@@ -72,13 +72,13 @@ export const ProductContextProvider = ({ children }) => {
     }
   };
   //  get all products
-  const getproducts = async () =>{
-    await axios.get(process.env.NEXT_PUBLIC_API + "/product/getallproduct")
-    .then(x=>{
-      console.log(x,",_----")
-      setProducts(x.data)
-    })
-}
+  const getproducts = async () => {
+    await axios
+      .get(process.env.NEXT_PUBLIC_API + "/product/getallproduct")
+      .then((x) => {
+        setProducts(x.data);
+      });
+  };
   useEffect(() => {
     getproducts();
   }, []);

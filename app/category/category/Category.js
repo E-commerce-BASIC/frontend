@@ -5,17 +5,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const Category = ({ params }) => {
+const Category = ({ category }) => {
   const [data, setData] = useState([]);
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const res = await axios.post(`/api/category/${params}`);
-//       setData(res.data.data);
-//     };
-//     fetchData();
-//     window.scrollTo(0, 0);
-//   }, [params]);
-// console.log(data)
+
+  // const searchParams = useSearchParams();
+  // const searchQuery = searchParams.get("search");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // const res = await axios.post(`/api/category/${params}`);
+      const product = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/category/get_all_product_by_category`,
+        { category }
+      );
+      // console.log(product);
+      setData(product.data);
+    };
+    fetchData();
+    window.scrollTo(0, 0);
+  }, [category]);
+  console.log(category)
   // if (!data[0]?.mainImage) {
   //   return (
   //     <div className="w-full lg:w-11/12 mx-auto my-4">
@@ -28,7 +37,7 @@ const Category = ({ params }) => {
     <>
       <div className="flex flex-col items-center justify-center w-full h-96 bg-cover bg-center bg-no-repeat">
         <div className="flex flex-col items-center justify-center w-full h-full bg-no-repeat bg-cover bg-hero-pattern">
-          <h1 className="text-4xl font-bold text-white">{params}</h1>
+          <h1 className="text-4xl font-bold text-white">{category}</h1>
           <p className="text-xl font-medium text-white">
             For unique and stylish clothing in the collection you can select the
             best one for you.
@@ -39,20 +48,20 @@ const Category = ({ params }) => {
         className="mx-auto w-11/12 px-2 py-8 sm:px-6 sm:py-12 lg:px-8 text-gray-500 text-sm"
         style={{ maxWidth: "90rem" }}
       >
-        Home <span className="mx-2">/</span> {params}
+        Home <span className="mx-2">/</span> {category}
       </div>
       <div className="w-full lg:w-11/12 mx-auto my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2">
-        {data?.data?.products?.map((product) => (
+        {data?.data?.products?.map((product,i) => (
           <Link
             href={`/products/${product?.id}`}
-            key={product?._id}
+            key={i}
             className="group"
           >
             <div className="aspect-h-1 aspect-w-1 w-full  md:h-5/6 overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
               <Image
                 width={500}
                 height={400}
-                src={process.env.NEXT_PUBLIC_API+"/uploads/"+product.image}
+                src={process.env.NEXT_PUBLIC_API + "/uploads/" + product.image}
                 alt={product?.name}
                 className="h-full w-full object-cover object-center group-hover:opacity-75"
               />

@@ -132,11 +132,14 @@ const Form = () => {
     setSelectedTags([]); // Clear selected tags when changing category
   };
 
-  // useEffect(() => {
-  //   const res = async () => {
-  //     const response = await axios.get("/api/tags");
-  //     setTags(response.data.data)
-  //   }
+  useEffect(() => {
+    const res = async () => {
+      const tag = await axios.get(process.env.NEXT_PUBLIC_API + '/tag')
+      setTags(tag.data);
+    };
+
+    res();
+  }, []);
 
   //   res()
   // }, [])

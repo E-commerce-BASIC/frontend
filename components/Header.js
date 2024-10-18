@@ -109,7 +109,7 @@ const Header = () => {
                       {categories?.map((category) => (
                         <li key={category.id}>
                           <Link
-                            href={`/category/${category.category}`}
+                            href={`/category/category?search=${category.category}`}
                             className="block px-5 py-2.5 text-sm text-gray-800 transition hover:bg-gray-100"
                           >
                             {category.category}

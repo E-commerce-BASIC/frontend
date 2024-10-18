@@ -11,14 +11,15 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
-  // useEffect(() => {
-  //   const Allproducts = async () => {
-  //     const { data } = await axios.get("/api/allproducts");
-  //     setproducts(data.data);
-  //     console.log({data},"<------- data")
-  //   };
-  //   Allproducts();
-  // }, []);
+  useEffect(() => {
+    const Allproducts = async () => {
+      // const { data } = await axios.get("/api/allproducts");
+      const { data } = await axios.get(process.env.api + '/product/getallproduct')
+      // setproducts(data.data);
+      console.log({data},"<------- data")
+    };
+    Allproducts();
+  }, []);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
