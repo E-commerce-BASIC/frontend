@@ -12,18 +12,18 @@ const RelatedProducts = ({ id }) => {
     // const res = await axios.get(`/api/relatedProducts/${id}`);
 
     const product = await axios.get(
-      process.env.api + `/product/get_related_product/${id}`
+      process.env.NEXT_PUBLIC_API + `/product/get_related_product/${id}`
     );
-    
-    setProduct(product?.data?.data);
+    // console.log(product.data)
+    setProduct(product?.data);
   };
   useEffect(() => {
     fetchProduct();
   }, [id]);
 
-  // console.log({ product });
+  // console.log( product[0]?.product );
 
-  if (!product?.relatedProducts) {
+  if (!product[0]?.product) {
     return (
       <>
         <h2 className="w-11/12 text-center md:text-start text-2xl font-bold text-gray-900 mt-10 mb-5 px-4 sm:px-0 mx-auto">
@@ -44,7 +44,7 @@ const RelatedProducts = ({ id }) => {
       </h2>
 
       <div className=" w-11/12 mx-auto grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-6">
-        {product?.relatedProducts?.map((product) => (
+        {product?.map((product) => (
           <Link
             href={`/products/id?search=${product?.product?.id}`}
             key={product?.product?.id}

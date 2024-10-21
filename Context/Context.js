@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter,usePathname } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 import { debounce } from "lodash";
 import toast from "react-hot-toast";
@@ -25,7 +25,8 @@ const ContextProvider = ({ children }) => {
     username: "",
     password: "",
   });
-  const router = useRouter();
+  const path = usePathname();
+  const router= useRouter();
 
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
@@ -151,10 +152,12 @@ const ContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (user?.Info?.profile?.user_id != 1) {
+    if (path === "/admin/" && user?.Info?.profile?.user_id !== 1) {
       router.push("/");
     }
-  }, [user?.Info?.profile?.user_id, router]);
+    // console.log(path)
+  }, [user?.Info?.profile?.user_id, path]);
+
   return (
     <Context.Provider
       value={{
