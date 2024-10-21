@@ -151,10 +151,10 @@ const ContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (user?.Info?.user_id != 1) {
+    if (user?.Info?.profile?.user_id != 1) {
       router.push("/");
     }
-  }, [user?.Info?.user_id, router]);
+  }, [user?.Info?.profile?.user_id, router]);
   return (
     <Context.Provider
       value={{
