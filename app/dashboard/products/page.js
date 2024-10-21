@@ -16,7 +16,7 @@ const Products = () => {
       // const { data } = await axios.get("/api/allproducts");
       const { data } = await axios.get(process.env.api + '/product/getallproduct')
       // setproducts(data.data);
-      console.log({data},"<------- data")
+      // console.log({data},"<------- data")
     };
     Allproducts();
   }, []);

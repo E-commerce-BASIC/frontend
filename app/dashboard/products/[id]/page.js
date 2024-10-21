@@ -26,9 +26,9 @@ const Product = () => {
 
   // Handle update product details
   const UdateProducts = async () => {
-    const res = await axios.put(`/api/allproducts/${params.id}`, {
-      product,
-    });
+    // const res = await axios.put(`/api/allproducts/${params.id}`, {
+    //   product,
+    // });
     route.push("/dashboard/products");
     toast.success("Product updated successfully");
     return res;
@@ -36,7 +36,7 @@ const Product = () => {
 
   //  Handle delete product
   const DeleteProduct = async () => {
-    const res = await axios.delete(`/api/allproducts/${params.id}`);
+    // const res = await axios.delete(`/api/allproducts/${params.id}`);
     route.push("/dashboard/products");
     toast.success("Product deleted successfully");
     return res;

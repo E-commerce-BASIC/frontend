@@ -27,7 +27,7 @@ export default function BG_Card() {
             const lastTwo = x.products.slice(2);
             return (
               <div
-              key={i}
+                key={i}
                 onClick={() => console.log(x)}
                 className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-96"
               >
@@ -37,7 +37,7 @@ export default function BG_Card() {
                     {firstTwo.map((product, p1) => {
                       return (
                         <a key={p1} href={`/products/${product.id}`}>
-                         <Image
+                          <Image
                             src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
                             alt="Image 1"
                             className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
@@ -53,7 +53,7 @@ export default function BG_Card() {
                     {lastTwo.map((product, p1) => {
                       return (
                         <a key={p1} href={`/products/${product.id}`}>
-                         <Image
+                          <Image
                             src="https://cdn.pixabay.com/photo/2014/05/21/13/25/shopping-cart-349544_640.png"
                             alt="Image 1"
                             className="w-24 h-24 sm:w-32 sm:h-32 p-2 rounded-lg"
@@ -69,7 +69,7 @@ export default function BG_Card() {
 
                 <div className="p-4 text-center">
                   <Link
-                    href={`category/${x?.category}`}
+                    href={`/category/category?search=${x?.category}`}
                     className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
                   >
                     Visit
