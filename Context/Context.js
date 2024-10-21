@@ -137,7 +137,7 @@ const ContextProvider = ({ children }) => {
     return () => {
       debouncedCurrentUser.cancel();
     };
-  }, []);
+  }, [loading]);
 
   // logout user
 
