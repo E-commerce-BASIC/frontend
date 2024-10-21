@@ -4,9 +4,9 @@ import Image from "next/image";
 export default function Carousels() {
   return (
     <Carousel className="">
-      <div className="relative h-full w-full">
+      <div className=" h-full w-full">
       <Image
-          src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+          src="https://img.lazcdn.com/us/domino/6b40bd28-3faa-40d7-a8fc-587be3e053dd_PK-1976-688.jpg_2200x2200q80.jpg_.webp"
           alt="image 1"
           className="h-full w-full object-cover"
           width={100}
@@ -17,7 +17,7 @@ export default function Carousels() {
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+              className="mb-4 text-3xl md:text-4xl lg:text-5xl text-textColour  "
             >
               The Beauty of Nature
             </Typography>
@@ -38,7 +38,7 @@ export default function Carousels() {
       </div>
       <div className="relative h-full w-full">
       <Image
-          src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+          src="https://img.lazcdn.com/us/domino/d6ae1fba-1f51-4e4c-a501-75b7737371d5_PK-1976-688.jpg_2200x2200q80.jpg_.webp"
           alt="image 2"
           className="h-full w-full object-cover"
           height={100}
@@ -49,7 +49,7 @@ export default function Carousels() {
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+              className="mb-4 text-3xl md:text-4xl lg:text-5xl text-textColour"
             >
               The Beauty of Nature
             </Typography>
@@ -76,7 +76,7 @@ export default function Carousels() {
       </div>
       <div className="relative h-full w-full">
       <Image
-          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+          src="https://img.lazcdn.com/us/domino/e4dc38af-a550-4fbd-990b-a9a177526260_PK-1976-688.jpg_2200x2200q80.jpg_.webp"
           alt="image 3"
           className="h-full w-full object-cover"
           height={100}
@@ -87,7 +87,7 @@ export default function Carousels() {
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+              className="mb-4 text-3xl md:text-4xl lg:text-5xl text-textColour"
             >
               The Beauty of Nature
             </Typography>

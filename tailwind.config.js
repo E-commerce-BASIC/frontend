@@ -18,6 +18,14 @@ module.exports = withMT({
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        primary: "var(--primary-color)",
+        secondary: "var(--secondary-color)",
+        textColour: "var(--textColour)",
+        boderColour: "var(--boderColour)",
+        footer: "var(--footer)",
+        boderHover: "var(--boderHover)",
+      },
     },
   },
   plugins: [],

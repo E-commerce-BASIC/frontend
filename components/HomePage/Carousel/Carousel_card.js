@@ -42,7 +42,7 @@ export default function Carousel_card({ show }) {
                       <div className="p-4 flex-1">
                         {/* Product Name */}
                         <h3 className="text-xl font-semibold text-center text-gray-800">
-                          {productItem.name}
+                          {productItem.name.split(" ").slice(0, 3).join(" ")}
                         </h3>
 
                         {/* Product Image */}
@@ -61,9 +61,9 @@ export default function Carousel_card({ show }) {
                         </div>
 
                         {/* Product Description */}
-                        <div className="mt-4 text-center text-gray-600">
+                        {/* <div className="mt-4 text-center text-gray-600">
                           <p className="text-sm">{productItem.description}</p>
-                        </div>
+                        </div> */}
                       </div>
 
                       {/* Price & Action */}
@@ -101,7 +101,7 @@ export default function Carousel_card({ show }) {
                       <div className="p-4 flex-1">
                         {/* Product Name */}
                         <h3 className="text-xl font-semibold text-center text-gray-800">
-                          {productItem.name}
+                          {productItem.name.split(" ").slice(0, 3).join(" ")}
                         </h3>
 
                         {/* Product Image */}
@@ -120,9 +120,9 @@ export default function Carousel_card({ show }) {
                         </div>
 
                         {/* Product Description */}
-                        <div className="mt-4 text-center text-gray-600">
+                        {/* <div className="mt-4 text-center text-gray-600">
                           <p className="text-sm">{productItem.description}</p>
-                        </div>
+                        </div> */}
                       </div>
 
                       {/* Price & Action */}

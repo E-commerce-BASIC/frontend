@@ -26,33 +26,7 @@ const ContextProvider = ({ children }) => {
     password: "",
   });
   const router = useRouter();
-  // sign up user
-  // const handleSignUpSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
 
-  //   try {
-  //     const response = await axios.post("/api/signup", signup);
-  //     // console.log({response},"<-------------")
-  //     setLoading(false);
-  //     setError(response.data.status !== 201);
-  //     setMessage(response.data.message);
-
-  //     if (response.data.message === "User Registered Successfully") {
-  //       router.push("/loginpage");
-  //       toast.success("User created successfully");
-  //       setSignUp({
-  //         username: "",
-  //         email: "",
-  //         password: "",
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     setLoading(false);
-  //     setError(true);
-  //   }
-  // };
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -87,32 +61,6 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  // login user
-  // const handleLoginSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-
-  //   try {
-  //     const response = await axios.post("/api/login", login);
-  //     setLoading(false);
-  //     setError(response.data.status !== 201);
-  //     setMessage(response.data.message);
-
-  //     if (response.data.message === "User login successfully") {
-  //       router.push("/");
-
-  //       toast.success("User login successfully");
-  //       setLogin({
-  //         username: "",
-  //         password: "",
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     setLoading(false);
-  //     setError(true);
-  //   }
-  // };
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -195,19 +143,18 @@ const ContextProvider = ({ children }) => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get("/api/logout");
-      setUser(null);
-      router.push("/loginpage");
+      Cookies.remove(process.env.NEXT_PUBLIC_authToken); // No need for await
+      await setUser(null);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // useEffect(() => {
-  //   if (!user?.isAdmin) {
-  //     router.push("/");
-  //   }
-  // }, [user?.isAdmin, router]);
+  useEffect(() => {
+    if (user?.Info?.user_id != 1) {
+      router.push("/");
+    }
+  }, [user?.Info?.user_id, router]);
   return (
     <Context.Provider
       value={{

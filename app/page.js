@@ -29,7 +29,7 @@ export default function Home() {
       </span>
       <HomeProducts show={show} /> */}
       <ThemeProvider>
-        <Fist_nav />
+        {/* <Fist_nav /> */}
         <Sec_nav />
         {/* <Main_nav /> */}
         <Bg_img />

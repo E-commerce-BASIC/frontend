@@ -9,9 +9,13 @@ const RelatedProducts = ({ id }) => {
   const [product, setProduct] = useState([]);
 
   const fetchProduct = async () => {
-    const res = await axios.get(`/api/relatedProducts/${id}`);
+    // const res = await axios.get(`/api/relatedProducts/${id}`);
 
-    setProduct(res.data);
+    const product = await axios.get(
+      process.env.api + `/product/get_related_product/${id}`
+    );
+    
+    setProduct(product?.data?.data);
   };
   useEffect(() => {
     fetchProduct();

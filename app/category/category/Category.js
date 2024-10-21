@@ -13,7 +13,7 @@ const Category = ({ category }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // const res = await axios.post(`/api/category/${params}`);
+      
       const product = await axios.post(
         `${process.env.NEXT_PUBLIC_API}/category/get_all_product_by_category`,
         { category }
@@ -24,7 +24,7 @@ const Category = ({ category }) => {
     fetchData();
     window.scrollTo(0, 0);
   }, [category]);
-  console.log(category)
+  console.log(category);
   // if (!data[0]?.mainImage) {
   //   return (
   //     <div className="w-full lg:w-11/12 mx-auto my-4">
@@ -51,9 +51,9 @@ const Category = ({ category }) => {
         Home <span className="mx-2">/</span> {category}
       </div>
       <div className="w-full lg:w-11/12 mx-auto my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2">
-        {data?.data?.products?.map((product,i) => (
+        {data?.data?.products?.map((product, i) => (
           <Link
-            href={`/products/${product?.id}`}
+            href={`/products/id?search=${product?.id}`}
             key={i}
             className="group"
           >

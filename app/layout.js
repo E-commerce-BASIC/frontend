@@ -11,8 +11,9 @@ import AdminProvider from "@/Context/AdminProvider";
 import BillingProvider from "@/Context/BillingProvider";
 import PaymentProvider from "@/Context/paymentProvider";
 import InvoicesProvider from "@/Context/InvoicesProvider";
-import {InstallmentContextProvider} from "@/Context/InstallmentProvider";
+import { InstallmentContextProvider } from "@/Context/InstallmentProvider";
 import TrackingID from "@/components/HomePage/coming_soon2/trackingId/TrackingID";
+import Fist_nav from "@/components/HomePage/navbar/Fist_nav";
 const inter = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
                   <AdminProvider>
                     <ProductContextProvider>
                       <CartProvider>
+                        <Fist_nav />
                         <Header />
                         <Toaster />
                         <TrackingID />
