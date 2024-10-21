@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Cookies from "js-cookie";
 
 export default function Checkout() {
   const [CartItem, setCartItem] = useState([]);
@@ -18,8 +19,9 @@ export default function Checkout() {
         },
       })
       .then(
-        (x) => setCartItem(x.data[0].order_items),
-        setSubTotal(x.data[0].Total_price)
+        (x) => (
+          setCartItem(x.data[0].order_items), setSubTotal(x.data[0].Total_price)
+        )
       )
       .catch((x) => console.log(x));
   };

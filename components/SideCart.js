@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 const SideCart = ({ setIsCartOpen, isCartOpen }) => {
   const { user } = useContext(Context);
   const [usersCart, setUserCart] = useState([]);
+  const [SubTotal, setSubTotal] = useState(0);
   const totalPrice = usersCart?.reduce(
     (total, order) =>
       total +
@@ -21,7 +22,7 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
       ),
     0
   );
-
+  console.log(usersCart);
   // get user cart data
   const First_run = async () => {
     const authToken = await Cookies.get(process.env.NEXT_PUBLIC_authToken);
@@ -32,11 +33,7 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
           Authorization: `Bearer ${authToken}`,
         },
       })
-      .then(
-        (x) => (
-          setUserCart(x.data[0].order_items), setSubTotal(x.data[0].Total_price)
-        )
-      )
+      .then((x) => (setUserCart(x.data), setSubTotal(x.data[0].Total_price)))
       .catch((x) => console.log(x));
   };
 
@@ -131,7 +128,73 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
                                   ?.map((user, userIndex) => {
                                     return (
                                       <React.Fragment key={userIndex}>
-                                        <li
+                                        {user?.order_items?.map((x) => {
+                                          return (
+                                            <li
+                                              onClick={() => console.log()}
+                                              key={x?.id}
+                                              className="flex py-6"
+                                            >
+                                              <Link
+                                                href={`/products/id?search=${x?.product?.id}`}
+                                                className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md"
+                                              >
+                                                <Image
+                                                  height={200}
+                                                  width={200}
+                                                  src={
+                                                    process.env
+                                                      .NEXT_PUBLIC_API +
+                                                    "/uploads/" +
+                                                    x?.product?.image
+                                                  }
+                                                  alt={x?.product?.name}
+                                                  className="h-full w-full object-contain object-center"
+                                                />
+                                              </Link>
+
+                                              <div className="ml-4 flex flex-1 flex-col">
+                                                <div>
+                                                  <div className="flex justify-between text-base font-medium text-gray-900">
+                                                    <h3>
+                                                      <a
+                                                        href={x?.product?.id}
+                                                      >
+                                                        {x?.product?.name}
+                                                      </a>
+                                                    </h3>
+
+                                                    <p className="ml-4">
+                                                      ${x?.product?.price}
+                                                    </p>
+                                                  </div>
+                                                </div>
+
+                                                <div className="flex flex-1 items-end justify-between text-sm">
+                                                  <p className="text-gray-500">
+                                                    Qty {x?.quantity}
+                                                  </p>
+
+                                                  <div className="flex">
+                                                    <button
+                                                      onClick={() =>
+                                                        removeItem(
+                                                          x?.product?.id
+                                                        )
+                                                      }
+                                                      type="button"
+                                                      className="font-medium text-[#2f4550] hover:text-[#2f4550]"
+                                                    >
+                                                      Remove
+                                                    </button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </li>
+                                          );
+                                        })}
+                                        {/* <li
+                                        onClick={()=>console.log()}
                                           key={user?.id}
                                           className="flex py-6"
                                         >
@@ -187,7 +250,7 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
                                               </div>
                                             </div>
                                           </div>
-                                        </li>
+                                        </li> */}
                                       </React.Fragment>
                                     );
                                   })
@@ -216,13 +279,13 @@ const SideCart = ({ setIsCartOpen, isCartOpen }) => {
                     </div>
 
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                      {user?.data && (
+                      {user?.Info && (
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <p>Subtotal</p>
                           <p>$ {totalPrice}.00</p>
                         </div>
                       )}
-                      {user?.data && (
+                      {user?.Info && (
                         <p className="mt-0.5 text-sm text-gray-500">
                           Shipping and taxes calculated at checkout.
                         </p>
