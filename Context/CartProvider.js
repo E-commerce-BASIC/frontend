@@ -17,7 +17,7 @@ const CartProvider = ({ children }) => {
   const addItemToCart = async ({ product, e }) => {
     if (e && e.preventDefault) e.preventDefault();
     const authToken = Cookies.get(process.env.NEXT_PUBLIC_authToken) || "";
-    // console.log(product)
+    console.log(product)
     try {
       const cartItem = await axios.post(
         process.env.NEXT_PUBLIC_API + "/order",

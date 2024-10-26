@@ -21,6 +21,7 @@ export const ProductContextProvider = ({ children }) => {
   const [rating, setrating] = useState("");
   const [discount, setdiscount] = useState("");
   const [variants, setvariants] = useState("");
+  const [categories,setCategories]=useState([])
 
   const route = useRouter();
 
@@ -34,7 +35,9 @@ export const ProductContextProvider = ({ children }) => {
     formData.append("price", price);
     formData.append("description", description);
     formData.append("category_name", category);
-    formData.append("image", file); // Append the file
+    for (let i = 0; i < file.length; i++) {
+      formData.append("image", file[i]); // Use the same "image" field name
+    }
     formData.append("uploading", uploading);
     formData.append("quantity", quantity);
     formData.append("brand", brand);
@@ -73,15 +76,24 @@ export const ProductContextProvider = ({ children }) => {
   };
   //  get all products
   const getproducts = async () => {
-    await axios
-      .get(process.env.NEXT_PUBLIC_API + "/product/getallproduct")
-      .then((x) => {
-        setProducts(x.data);
-      });
-  };
+    await axios.get(process.env.NEXT_PUBLIC_API + "/product/getallproduct")
+      .then(x => {
+        console.log(x, ",_----")
+        setProducts(x.data)
+      })
+  }
+
+  const allCat = async () => {
+    const { data } = await axios.get(process.env.NEXT_PUBLIC_API + "/category/allcategory")
+    // console.log(data.data, "<----- cat")
+    setCategories(data.data)
+  }
   useEffect(() => {
     getproducts();
+    allCat()
   }, []);
+
+
   return (
     <ProductContext.Provider
       value={{
@@ -111,6 +123,7 @@ export const ProductContextProvider = ({ children }) => {
         setvariants,
         selectedTags,
         setSelectedTags,
+        categories
       }}
     >
       {children}

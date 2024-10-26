@@ -34,8 +34,8 @@ const Form = () => {
     setSelectedTags,
   } = useContext(ProductContext);
 
-  const { categories} = useContext(Context);
-
+  const { categories } = useContext(Context);
+  // console.log(file)
   const [Tags, setTags] = React.useState([]);
   const [ListCategory, setListCategory] = React.useState([]);
 
@@ -91,7 +91,9 @@ const Form = () => {
 
   useEffect(() => {
     const res = async () => {
+      // const response = await axios.get("/api/tags");
       const Tag = await axios.get(process.env.NEXT_PUBLIC_API + '/tag')
+      // console.log(Tag)
       setTags(Tag.data);
     };
 
@@ -248,11 +250,10 @@ const Form = () => {
                 {Tags.filter((tag) => tag.category === category).map((tag) => (
                   <li
                     key={tag.id}
-                    className={`m-1 p-2 border rounded-lg cursor-pointer ${
-                      selectedTags.some((t) => t.id === tag.id)
+                    className={`m-1 p-2 border rounded-lg cursor-pointer ${selectedTags.some((t) => t.id === tag.id)
                         ? "bg-blue-500 text-white"
                         : "bg-gray-200 text-black"
-                    }`}
+                      }`}
                     onClick={() => handleTagClick(tag)}
                   >
                     {tag.tag_name} {/* Display the tag name */}
@@ -321,7 +322,8 @@ const Form = () => {
                     className="hidden"
                     required
                     accept="image/*"
-                    onChange={(e) => setFile(e.target.files[0])}
+                    onChange={(e) => setFile(e.target.files)}
+                    multiple
                   />
                 </label>
               </div>
@@ -333,11 +335,11 @@ const Form = () => {
 
         <div className=" flex flex-col items-center justify-center  mt-3">
           {uploading ||
-          !name ||
-          !category ||
-          !file ||
-          !description ||
-          !price ? (
+            !name ||
+            !category ||
+            !file ||
+            !description ||
+            !price ? (
             <button
               type="submit"
               disabled

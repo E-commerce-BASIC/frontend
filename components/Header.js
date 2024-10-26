@@ -8,7 +8,6 @@ import { Context } from "@/Context/Context";
 import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 import Image from "next/image";
-import Cookies from "js-cookie";
 
 const Header = () => {
   const {
@@ -27,7 +26,7 @@ const Header = () => {
   const [Search, setSearch] = useState(0);
 
   const name = user?.Info?.username.replace(/ .*/, "");
-  // console.log(user?.Info?.user_id);
+  // console.log(user.Info?.username);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -52,12 +51,11 @@ const Header = () => {
     if (search?.data?.message === "Tracking Found")
       return setTracking(true), setTrackingData(search);
   };
-  console.log(user?.Info?.profile?.user_id);
   return (
     <div className="w-full relative">
       <header className="bg-primary ">
-        <div className="mx-auto flex h-16 max-w-screen-2xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-          <Link className="block text-teal-600" href="/">
+        <div className=" flex h-16 items-center  px-5 ">
+          <Link className="block text-teal-600 px-3" href="/">
             <span className="sr-only">Home</span>
 
             <div className="">
@@ -68,21 +66,12 @@ const Header = () => {
           <div className="flex flex-1 items-center justify-end md:justify-between">
             <nav aria-label="Global" className="hidden md:block w-full">
               <ul className="flex items-center gap-6 text-sm w-full">
-                <li>
-                  <Link
-                    className="text-textColour transition hover:text-footer "
-                    href="/about"
-                  >
-                    About
-                  </Link>
-                </li>
-
                 <li
                   className="relative"
                   onMouseEnter={() => setIsHovered(true)}
                 >
                   <Link
-                    href={"/category"}
+                    href={"#"}
                     className="text-textColour transition hover:text-footer cursor-pointer "
                   >
                     Categories
@@ -132,16 +121,6 @@ const Header = () => {
                     Orders
                   </Link>
                 </li>
-                {user?.Info?.profile?.user_id == 1 && (
-                  <li>
-                    <Link
-                      className="text-textColour transition hover:footer "
-                      href="/admin"
-                    >
-                      Admin
-                    </Link>
-                  </li>
-                )}
                 <li className="w-full px-4">
                   <div className="flex items-center bg-white rounded-full px-4 py-2 shadow-lg w-full">
                     <FaSearch className="text-textColour text-lg mr-3" />
@@ -155,6 +134,16 @@ const Header = () => {
                     </form>
                   </div>
                 </li>
+                {user?.Info?.profile?.user_id == 1 && (
+                  <li>
+                    <Link
+                      className="text-textColour transition hover:footer "
+                      href="/admin"
+                    >
+                      Admin
+                    </Link>
+                  </li>
+                )}
               </ul>
             </nav>
 
